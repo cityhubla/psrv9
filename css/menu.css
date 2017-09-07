@@ -1,0 +1,73 @@
+/*Why 500ft About Area*/
+.about {
+display:none;
+}
+
+.why500 {
+    vertical-align: middle;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 5em 3em 0em 3em
+}
+
+.why500 img {
+    max-height: 200px;
+    vertical-align: middle;
+}
+
+.why500 b {
+color: #179dd9;
+}
+
+.why500 span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    vertical-align: middle;
+    padding-left: 15px;
+    color: white;
+    line-height: .9;
+    display:block;
+}
+
+.why500_lower {
+    position: relative;
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+}
+
+.activemenu {
+    display:block
+}
+
+div#getinvolved{
+padding:10px
+}
+
+div#resources{
+padding:10px
+}
+
+@media screen and (max-width: 780px) {
+.why500 {
+    display: block;
+    padding: 0;
+}    
+.why500 img {
+    max-width: 100%;
+    padding-bottom: 10px;
+}    
+    
+.why500 span {
+    font-size: 1em;
+    vertical-align: middle;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    line-height: 1;
+}
+}

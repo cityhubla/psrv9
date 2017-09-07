@@ -1,0 +1,120 @@
+#infopanel {
+    position:absolute; 
+    top:0; 
+    bottom:0; 
+    width:30%; 
+    background-color: #2a3137;
+    right:0;
+    border-style: solid;
+    border-color: white;
+}
+
+#info_1 {
+    font-family: 'Poppins', sans-serif;
+	font-size: 1.25em;
+    position: relative;
+    max-width: 100%;
+    display: block;
+    margin: 45px 0 0 0;
+    padding: 10px 10px 10px 10px;
+    line-height: 1;
+    color: white
+}
+
+#info_selected {
+    font-family: 'Poppins', sans-serif;
+	font-size: 1.25em;
+    position: relative;
+    max-width: 100%;
+    display: block;
+    padding: 10px 10px 10px 10px;
+    line-height: 1;
+    color: white;
+    background-color: #708090;
+}
+
+#scrollinfo{
+    overflow-y: scroll;
+    height:100%
+}
+
+#info_500ftbuffer {
+    font-family: 'Poppins', sans-serif;
+	font-size: 1em;
+    position: relative;
+    max-width: 100%;
+    max-height: 50%;
+    display: block;
+    padding: 0px 0px 0px 0px;
+    line-height: 1;
+    color: white;
+    
+}
+
+.epa_locations {
+    background-color: #179dd9;
+    opacity:.7;
+    display:inline-block;
+    color:white;
+    width:100%;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.epa_locations p {
+    padding-left: 5px;
+}
+
+.epa_locations span {
+    padding-left: 5px;
+}
+
+.epa_locations:hover{
+    opacity: 1;
+}
+
+.epa_locations img{
+    width:30px;
+    vertical-align: middle;
+}
+
+.lms_locations {
+    background-color: #f9b200;
+    opacity:.7;
+    display:inline-block;
+    color:white;
+    width:100%;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.lms_locations p {
+    padding-left: 5px;
+}
+
+.lms_locations span {
+    padding-left: 5px;
+}
+
+.lms_locations:hover{
+    opacity: 1;
+}
+
+.lms_locations img{
+    width:30px;
+    vertical-align: middle;
+}
+
+
+.sublist{
+    color:white;
+    display:none;
+    width:100%;
+    background-color: #2a3137;
+} 
+
+@media screen and (max-width: 780px) {
+#infopanel{
+width:100%
+}
+}
