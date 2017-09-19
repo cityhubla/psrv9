@@ -11,4 +11,6 @@ A project of the Physicians for Social Responsibility, made possible by the Cali
 * [jquery](https://jquery.com/) - Simplified Client Side Scripting
 * [jquery-ui](https://jqueryui.com/) - Curated set of user interface interactions
 
-Copyright (c) 2017 - theworksLA. Code Released under the MIT License. Logo and Graphics (c) 2017 - Physicians for Social Responsibility Los Angeles
+Copyright (c) 2017 - theworksLA.  
+Logo and Graphics (c) 2017 - Physicians for Social Responsibility Los Angeles
+Code Released under the MIT License.
