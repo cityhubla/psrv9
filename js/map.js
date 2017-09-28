@@ -93,7 +93,7 @@ map.on('click', function (e) {
     sourceLayer:'assessor_2015_3-1iiqao',
     filter: ['==','ain',String(feature.properties.ain)]
     });
-    withinlist(parcelpost[0]);
+    map.on('moveend', function(e){map.areTilesLoaded(withinlist(parcelinfo[0]))});
     selectedapn = parcelinfo[0].properties.ain; //Sets global variable
     //Function to pull selected parcel into to infopanel
     $("#info_selected").append(
@@ -108,14 +108,17 @@ var withinlist_dep = function(parcel){
 
 var withinlist = function(parcel){
     var within500 = []; //Creates an empty array to fill with parcels within 500ft of user selected buffer
-    var geom = turf.getGeom(parcel); //Gets the geometry of the user selected parcel
+    var debugprop = [];
+    var buffer500 = turf.buffer(parcel, 0.094697, 'miles');
+    var geom = turf.getGeom(buffer500); //Gets the geometry of the user selected parcel
     var queryfeatures = map.queryRenderedFeatures({ layers: ['assessor_3'] }); //Gets a list of features rendered in the current view of the map
+    console.log(queryfeatures);
     //Turf Function to loop through each parcel in the current view of the map if it crosses or is contained by the user selected buffer
     $.each(queryfeatures, function(queryfeature, value){
+        debugprop.push(String(value.properties.ain));
         var checkgeomtype = turf.getGeomType(value);
-        var featuregeom = 0
-        if (checkgeomtype == "Polygon"){ featuregeom = turf.getGeom(value);
-        console.log(featuregeom);
+        //var featuregeom = 0
+        if (checkgeomtype == "Polygon"){ var featuregeom = turf.getGeom(value);
         var checkcontain = turf.booleanContains(geom,featuregeom);
         var checkoverlap = turf.booleanOverlap(geom,featuregeom);
             if (checkcontain == true){within500.push(String(value.properties.ain))}
@@ -124,6 +127,64 @@ var withinlist = function(parcel){
     within500 = jQuery.unique(within500);
     console.log(within500);
     map.setFilter("within500ft", ['in','ain'].concat(within500));
+    map.setFilter("hoverparcel", ['in','ain'].concat(debugprop));
+    loadlist(within500);
+    
+    /*map.addLayer({
+        'id': 'test',
+        'type': 'fill',
+        'source': {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'geometry': geom
+            }
+        },
+        'layout': {},
+        'paint': {
+            'fill-color': '#088',
+            'fill-opacity': 0.8
+        }
+    });*/
+}
+
+//Function to run Hazardous List
+var loadlist = function(within500ft){
+    $.each(hazardous_data.features, function(queryfeature, value){
+        var inlist = $.inArray(value.properties.AIN, within500ft);
+        if (inlist >= 0) {
+               var siccode;
+                if(typeof value.properties.siccoded!= 'undefined'){
+                siccode = value.properties.siccoded;
+                }else {siccode = "Facilty";}
+            $("#info_500ftbuffer").append(
+                    "<div class='epa_locations' onclick='togglelist(this)' onmouseover='highlightparcel("+value.properties.AIN+")'><img src='img/hazicon.png'><span>"+siccode+"</span>"+
+                    "<div class='sublist'><p class='usetitle'>Name: "+value.properties.primaryna+
+                    "<p>Address: "+value.properties.locationa+
+                    "<p>It is reported to the: "+value.properties.pgmsysac+
+                    "<p>Source: EPA Data"+
+                    "<p><a href="+value.properties.frsfacil+">EPA Page Link</a></p>"+
+                    "<p id='openform'>Is this information correct?</p></div></div>");
+        
+        }
+    })
+    
+    $.each(sensitive_data.features, function(queryfeature, value){
+        var inlist = $.inArray(value.properties.AIN, within500ft);
+        if (inlist >= 0) {
+            var siccode;
+            if(typeof value.properties.cat2!= 'undefined'){
+            siccode = value.properties.cat2;
+            }else {siccode = "Sensitive Use";}
+            $("#info_500ftbuffer").append(
+                    "<div class='lms_locations' onclick='togglelist(this)' onmouseover='highlightparcel("+value.properties.AIN+")'><img src='img/sensicon.png'><span>"+value.properties.cat2+"</span>"
+                    +"<div class='sublist'><p class='usetitle'>Name: "+value.properties.name+
+                    "<p>Address: "+value.properties.addrln1+
+                    "<p>Description: "+value.properties.descriptio+
+                    "<p>Source: LACOUNTY Points of Interest (LMS Data)</div></div>"); ;
+        
+        }
+    })
 }
     
 
