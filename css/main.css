@@ -5,7 +5,15 @@ body {
     background-color: #393a3e;
 }
 
+a:visited {
+    color:#f9b200;
+}
 
+a:link {
+    color:white;
+}
+
+/*Scrollbar Styling*/
 ::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -24,12 +32,40 @@ body {
 }
 
 
+
+
+
+/*body breakdown*/
+
 #nav_head {
     display: block;
     margin: 0 auto;
     height: 8vh;
     width: 90vw;
 }
+
+#main {
+    display: block;
+    margin: 0 auto;
+    height: 80vh;
+    width: 90vw;
+    position: relative;
+}
+
+#nav_foot {
+    font-family: 'Poppins';
+    color:white;
+    display: block;
+    margin: 0 auto;
+    height: 8vh;
+    width: 90vw;
+    
+}
+
+/*end of layout*/
+
+
+/*nav header*/
 
 .navlogo{
     font-family: 'Poppins';
@@ -47,13 +83,26 @@ display:none;
 background-color: #393a3e;    
 }
 
-#main {
-    display: block;
-    margin: 0 auto;
-    height: 80vh;
-    width: 90vw;
-    position: relative;
+.menubutton {
+    font-family: 'Poppins';
+    font-size: 1.5em;
+    color: #fbf9fa;
+    border: none;
+    background: none;
+    z-index: 1000;
+    float: right;
+    height: 8vh;
 }
+
+.menubutton:hover{
+    color: #f9b200;
+}
+
+/*end of nav header*/
+
+
+
+/*cover start*/
 
 #cover {
     font-family: 'Poppins';
@@ -70,6 +119,28 @@ background-color: #393a3e;
     color:white;
 }
 
+.cover H1{
+    font-size: 7em;
+    color: #f9b200;
+    line-height: 1.1;
+    position: relative;
+    z-index: 2;
+    margin:0;
+}
+
+.cover h2{
+    font-size: 3em;
+    color: #f9b200;
+    line-height: 0.9;
+    position: relative;
+    z-index: 2;
+    margin:0;
+}
+
+/*end of cover*/
+
+
+/*map panel start*/
 #map_panel {
     display: block;
     height: 100%;
@@ -88,48 +159,22 @@ background-color: #393a3e;
     float: right;
 }
 
-#nav_foot {
-    display: block;
-    margin: 0 auto;
-    height: 12vh;
-    width: 90vw;
+/*map panel end*/
+
+
+/*nav footer contents*/
+
+#nav_foot p {
+    text-align: center;
 }
 
-/*Button*/
-.menubutton {
-    font-family: 'Poppins';
-    font-size: 1.5em;
-    color: #fbf9fa;
-    border: none;
-    background: none;
-    z-index: 1000;
-    float: right;
-    height: 8vh;
+#nav_foot img{
+    max-height: 100%;
+    vertical-align: bottom;
 }
-
-.menubutton:hover{
-    color: #f9b200;
-}
-
 /*cover*/
 
-.cover H1{
-    font-size: 7em;
-    color: #f9b200;
-    line-height: 0.9;
-    position: relative;
-    z-index: 2;
-    margin:0;
-}
 
-.cover h2{
-    font-size: 3em;
-    color: #f9b200;
-    line-height: 0.9;
-    position: relative;
-    z-index: 2;
-    margin:0;
-}
 
 .logo {
     width: 60%;
@@ -179,22 +224,8 @@ text-align: center;
     background: #708090;
 }
 
-.orgstyle {
-    color:white;
-}
 
-.orgstyle a:visited {
-    color:#f9b200;
-}
 
-.orgstyle a:link {
-    color:white;
-}
-
-.orgstyle img{
-    max-height: 100%;
-    vertical-align: bottom;
-}
 
 /*mobile style*/
 
@@ -236,7 +267,7 @@ text-align: center;
     height: 50px;
 }    
 .cover H1{
-    font-size: 3em;
+    font-size: 2em;
 }
     
 .cover h2{
@@ -245,22 +276,7 @@ text-align: center;
 
 .submenu {
 background-color: #393a3e;    
-} 
-    
-.btn {
-    padding: 5px 5px;
-    margin: 0px 0px;}    
-.cover_lower {
-    position: relative;
-    padding-bottom: 30px;
-}
-.logoanimated{
-    color:white;
-    text-align: left;
-    font-size:20px;
-} 
-    
-
+}  
 }
 
 

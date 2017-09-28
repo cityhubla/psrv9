@@ -1,3 +1,4 @@
+//Function for animating opening page logo and text using slick.js
 $(document).ready(function(){
   $('.logoanimated').slick({
         dots: false,
@@ -10,16 +11,22 @@ $(document).ready(function(){
   });
 });
 
+//Activates the menubar
 $( "#togglenav" ).click(function() {
-    $( ".navmenu" ).fadeToggle( "slow", "linear" );
- 
+    if ($('.navlogo').css('display') == 'block'){
+        $( '.navlogo' ).fadeToggle( "fast", "linear" );   
+    }
+    $( ".navmenu" ).fadeToggle( "slow", "linear" ); 
 });
 
+//Shows the map from menubar
 $( ".togglecover" ).click(function() {
     $( "#cover" ).fadeToggle( "slow", "linear" );
     $( ".navmenu" ).fadeToggle( "slow", "linear" );
+    $( ".navlogo" ).fadeToggle( "slow", "linear" );
 });
 
+//Shows the submenus
 $( ".submenu" ).click(function() {
     if ($('#cover').css('display') == 'none'){
         $( "#cover" ).fadeToggle( "slow", "linear" );
@@ -33,6 +40,7 @@ $( ".submenu" ).click(function() {
     //$("#cover").children("div[id=']").attr("id",activatemenu).css('activemenu');           
 });
 
+//Activates the menubar from cover
 $( ".toggleabout" ).click(function() {
     if ($('#cover').css('display') == 'none'){
         $( "#cover" ).fadeToggle( "slow", "linear" );
@@ -44,6 +52,8 @@ $( ".toggleabout" ).click(function() {
  
 });
 
+//Shows the map from cover
 $( ".togglemap" ).click(function() {
     $( "#cover" ).fadeToggle( "slow", "linear" );
+    $( ".navlogo" ).fadeToggle( "slow", "linear" );
 });

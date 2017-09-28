@@ -4,6 +4,7 @@
     <meta charset='utf-8' />
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href="css/normalize.css" rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
@@ -15,8 +16,7 @@
     <link href="css/infopanel.css" rel='stylesheet'>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
     <script src='js/mapbox-gl-geocoder_modified.js'></script>
-    <script src=" https://npmcdn.com/@turf/turf@4.3.1/turf.min.js"></script>
-    <link href="css/normalize.css" rel='stylesheet'>
+    <script src="js/vendor/turf.min.js"></script>
     
 
 </head>
@@ -71,11 +71,6 @@
                 <button class="btn toggleabout">Why 500ft?</button>
                 <button class="btn togglemap">Find out</button>
                 </div>    
-                    <p class="orgstyle">A PROJECT OF | <a href ="http://www.psr-la.org/">PHYSICIANS FOR SOCIAL RESPONSIBILITY - LOS ANGELES</a>
-                    <a href="https://www.facebook.com/psrla"><img src="img/facebook.png"></a>
-                    <a href="https://twitter.com/psrla"><img src="img/twitter.png"></a>
-                    <a href="https://www.youtube.com/user/PSRLA"><img src="img/youtube.png"></a>
-                    <br> MADE POSSIBLE BY | <a href="http://www.calendow.org/">THE CALIFORNIA ENDOWMENT</a></p>
             </div>
             <div class='about' id='about'>
                         <div class='cover_section'>
@@ -192,7 +187,13 @@ Environmental Justice Screening Method - How does one assess the cumulative impa
         </div>
 
     </div>
-    <div id="nav_foot"></div>
+    <div id="nav_foot">
+                    <p>A PROJECT OF | <a href ="http://www.psr-la.org/">PHYSICIANS FOR SOCIAL RESPONSIBILITY - LOS ANGELES</a>
+                    <a href="https://www.facebook.com/psrla"><img src="img/facebook.png"></a>
+                    <a href="https://twitter.com/psrla"><img src="img/twitter.png"></a>
+                    <a href="https://www.youtube.com/user/PSRLA"><img src="img/youtube.png"></a>
+                    <br> MADE POSSIBLE BY | <a href="http://www.calendow.org/">THE CALIFORNIA ENDOWMENT</a></p>
+    </div>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>

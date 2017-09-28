@@ -1,16 +1,14 @@
 //Global Variables
 var selectedapn;
 var selectedaddress;
-var hazardous_data={type: 'FeatureCollection',features: []};
-var sensitive_data={type: 'FeatureCollection',features: []};
 
 //Loads mapbox map, linked to mapstyle psr_v5
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGhwc3JsYSIsImEiOiJjaW1sanhqa3kwNmdidHZtMHEyZ2VrdHV4In0.JSLojS72jB2OWG5NN82ysw';
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/hhpsrla/cj7rai1ewdtfa2rl54tznh7bs',
-    zoom: 9,
-    minZoom:9,
+    style: 'mapbox://styles/hhpsrla/cj3wle3yc0j842ss1xlzwkzs2',
+    zoom: 14,
+    minZoom:14,
     center: [-118.2751, 33.9843], //Centers in middle of both community plans
     hash:true
 });    
@@ -19,53 +17,82 @@ var map = new mapboxgl.Map({
 //URL Paths for Google Sheet feeds
 var hazardous_epadata = 'https://spreadsheets.google.com/feeds/list/1TWeq0ytlYlKa-yGB9t_6gMAJg3pOobgEjXlWJJ4RFpI/1/public/basic?alt=json'; //Pulls in feed from EPA List
 var sensitive_lms ='https://spreadsheets.google.com/feeds/list/1RRYPfj5Eh_vu4kN5nWb2GUGVKZQL_gFgCPHAmdRaDTo/1/public/basic?alt=json'; //Pulls in feed from LMS County List
+var geojson_epa = {type: 'FeatureCollection',features: []};
+var geojson_lms = {type: 'FeatureCollection',features: []};
 
-//Function to load and parse Hazardous Uses to an Array
+//Function to load and parse Hazardous Uses to a geojson
 $.getJSON(hazardous_epadata, function(hazardous) {
-    var highlightparcels=[];//Array to fill with APN from feed to highlight by color
-    //This function parses the Google JSON and pushes into a geojson
+    var highlightlocations=[];//Array to fill with APN from feed to highlight by color
+
+    //This function parses the JSON and pushes into the geojson
     hazardous.feed.entry.forEach(function(d) {
-        var splitfields = d.content.$t.split(', ');
-        var fields = {};
-        fields["AIN"]=d.title.$t
-        $.each(splitfields, function(key, value){
-            var split = value.split(': ');
-            fields[split[0]]=split[1]
-               });
-    hazardous_data.features.push({
-        type: "Feature",
-        apn: d.title.$t,
-        properties: fields
+    var splitfields = d.content.$t.split(', ');
+    var fields = {};
+    fields["AIN"]=d.title.$t
+    $.each(splitfields, function(key, value){
+        var split = value.split(': ');
+        fields[split[0]]=split[1]
+           });
+    var lat=parseFloat(fields["y"]);
+    var lng=parseFloat(fields["x"]);
+    highlightlocations.push(String(d.title.$t));//Pushes to Array
+    geojson_epa.features.push({
+      type: "Feature",
+      properties: fields,
+      geometry: {
+        type: "Point",
+        coordinates: [lng, lat]
+      }
     }); 
-    highlightparcels.push(String(d.title.$t));//Pushes to array for filtering mapbox vectortiles
+  });
+    //Function to add geojson to map
+    map.addLayer({
+        "id": "epa",
+        "type": "circle",
+        "source": {type: 'geojson',data: geojson_epa},
+        "paint": {
+        "circle-color": '#FFF',//#179dd9
+        "circle-radius": 0
+      }
     });
-    map.setFilter('industrial_uses_low',['in','ain'].concat(highlightparcels));//This highlights the parcels from zoom levels 9-14
-    map.setFilter('industrial_uses',['in','ain'].concat(highlightparcels));//This highlights the parcels from zoom levels 14-22
-    
+    map.setFilter('industrial_uses',['in','ain'].concat(highlightlocations));//This filters the parcel by AIN to turn blue
 });
 
-//Function to load and parse Sensitive Uses to an Array
+//Function to load and parse Sensitive Uses to a geojson    
 $.getJSON(sensitive_lms, function(sensitive) {
-    var highlightparcels=[];//Array to fill with APN from feed to highlight by color
+    var highlightlocations=[];//Array to fill with APN from feed to highlight by color
     //This function parses the JSON and pushes into the geojson
     sensitive.feed.entry.forEach(function(d) {
-        var splitfields = d.content.$t.split(', ');
-        var fields = {};
-        fields["AIN"]=d.title.$t
-        $.each(splitfields, function(key, value){
-            var split = value.split(': ');
-            fields[split[0]]=split[1]
-               });
-    sensitive_data.features.push({
-        type: "Feature",
-        apn: d.title.$t,
-        properties: fields
-    });    
-    highlightparcels.push(String(d.title.$t));//Pushes to array for filtering mapbox vectortile
+    var splitfields = d.content.$t.split(', ');
+    var fields = {};
+    fields["AIN"]=d.title.$t
+    $.each(splitfields, function(key, value){
+        var split = value.split(': ');
+        fields[split[0]]=split[1]
+           });
+    var lat=parseFloat(fields["y"]);
+    var lng=parseFloat(fields["x"]);
+    highlightlocations.push(String(d.title.$t));//Pushes to Array
+    geojson_lms.features.push({
+      type: "Feature",
+      properties: fields,
+      geometry: {
+        type: "Point",
+        coordinates: [lng, lat]
+      }
+    }); 
+  });
+    //Function to add geojson to map
+    map.addLayer({
+        "id": "lms",
+        "type": "circle",
+        "source": {type: 'geojson',data: geojson_lms},
+        "paint": {
+        "circle-color": '#000', //#f9b200
+        "circle-radius": 0
+      }
     });
-      map.setFilter('sensitive_uses_low',['in','ain'].concat(highlightparcels));//This highlights the parcels from zoom levels 9-14
-      map.setFilter('sensitive_uses',['in','ain'].concat(highlightparcels));//This highlights the parcels from zoom levels 14-22
-      
+    map.setFilter('sensitive_uses',['in','ain'].concat(highlightlocations));//This filters the parcel by AIN to turn orange
 }); 
 
 //Function to create a buffer and border around user selected parcel(polygon) 
@@ -93,43 +120,61 @@ map.on('click', function (e) {
     sourceLayer:'assessor_2015_3-1iiqao',
     filter: ['==','ain',String(feature.properties.ain)]
     });
+    console.log(parcelinfo);
     withinlist(parcelpost[0]);
     selectedapn = parcelinfo[0].properties.ain; //Sets global variable
+    console.log(selectedapn);
     //Function to pull selected parcel into to infopanel
     $("#info_selected").append(
         "This "+parcelinfo[0].properties['2015p_Gene']+" property has a "+parcelinfo[0].properties['2015p_Spec']+" use")
 });
     
 //Function with turf.js to find points within polygon (locations within parcel buffer)
-var withinlist_dep = function(parcel){
-    console.log(parcel);
-    console.log
-}
-
 var withinlist = function(parcel){
-    var within500 = []; //Creates an empty array to fill with parcels within 500ft of user selected buffer
-    var geom = turf.getGeom(parcel); //Gets the geometry of the user selected parcel
-    var queryfeatures = map.queryRenderedFeatures({ layers: ['assessor_3'] }); //Gets a list of features rendered in the current view of the map
-    //Turf Function to loop through each parcel in the current view of the map if it crosses or is contained by the user selected buffer
-    $.each(queryfeatures, function(queryfeature, value){
-        var checkgeomtype = turf.getGeomType(value);
-        var featuregeom = 0
-        if (checkgeomtype == "Polygon"){ featuregeom = turf.getGeom(value);
-        console.log(featuregeom);
-        var checkcontain = turf.booleanContains(geom,featuregeom);
-        var checkoverlap = turf.booleanOverlap(geom,featuregeom);
-            if (checkcontain == true){within500.push(String(value.properties.ain))}
-            if (checkoverlap == true){within500.push(String(value.properties.ain))};}
-    })
-    within500 = jQuery.unique(within500);
-    console.log(within500);
-    map.setFilter("within500ft", ['in','ain'].concat(within500));
+    var searchWithin = {
+    "type": "FeatureCollection",
+    "features": []
+    };
+    searchWithin.features.push(parcel);
+    var explodepoints= turf.explode(searchWithin);
+    console.log(explodepoints);
+    var epaWithin = turf.within(geojson_epa,searchWithin);
+    var lmsWithin = turf.within(geojson_lms,searchWithin);
+    console.log(epaWithin);
+    console.log(lmsWithin);
+    
+    $.each(epaWithin.features, function(index, value){
+    var siccode;
+    if(typeof value.properties.siccoded!= 'undefined'){
+    siccode = value.properties.siccoded;
+    }else {siccode = "Facilty";}
+            $("#info_500ftbuffer").append(
+                    "<div class='epa_locations' onclick='togglelist(this)' onmouseover='highlightparcel("+value.properties.AIN+")'><img src='img/hazicon.png'><span>"+siccode+"</span>"+
+                    "<div class='sublist'><p class='usetitle'>Name: "+value.properties.primaryna+
+                    "<p>Address: "+value.properties.locationa+
+                    "<p>It is reported to the: "+value.properties.pgmsysac+
+                    "<p>Source: EPA Data"+
+                    "<p><a href="+value.properties.frsfacil+">EPA Page Link</a></p>"+
+                    "<p id='openform'>Is this information correct?</p></div></div>");
+    });
+    
+    $.each(lmsWithin.features, function(index, value){
+    var siccode;
+    if(typeof value.properties.cat2!= 'undefined'){
+    siccode = value.properties.cat2;
+    }else {siccode = "Sensitive Use";}
+            $("#info_500ftbuffer").append(
+                    "<div class='lms_locations' onclick='togglelist(this)' onmouseover='highlightparcel("+value.properties.AIN+")'><img src='img/sensicon.png'><span>"+value.properties.cat2+"</span>"
+                    +"<div class='sublist'><p class='usetitle'>Name: "+value.properties.name+
+                    "<p>Address: "+value.properties.addrln1+
+                    "<p>Description: "+value.properties.descriptio+
+                    "<p>Source: LACOUNTY Points of Interest (LMS Data)</div></div>"); 
+    }); 
 }
     
 
 map.on('mousemove', "assessor_3", function (e) {
     var features = map.queryRenderedFeatures(e.point, {layers: ["assessor_3"]});
-    
     if (!features.length) {
           return;
     }
