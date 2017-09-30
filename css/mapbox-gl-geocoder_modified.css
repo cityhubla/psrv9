@@ -1,6 +1,6 @@
 /* Basics */
 .mapboxgl-ctrl-bottom-left .mapboxgl-ctrl{
-margin: 0px 0 135px -1px;
+/*margin: 0px 0 135px -1px;*/
 }
 .mapboxgl-ctrl-geocoder,
 .mapboxgl-ctrl-geocoder *,
