@@ -112,7 +112,7 @@ var withinlist = function(parcel){
     var buffer500 = turf.buffer(parcel, 0.094697, 'miles');
     var geom = turf.getGeom(buffer500); //Gets the geometry of the user selected parcel
     var queryfeatures = map.queryRenderedFeatures({ layers: ['assessor_3'] }); //Gets a list of features rendered in the current view of the map
-    console.log(queryfeatures);
+    //console.log(queryfeatures);
     //Turf Function to loop through each parcel in the current view of the map if it crosses or is contained by the user selected buffer
     $.each(queryfeatures, function(queryfeature, value){
         debugprop.push(String(value.properties.ain));
@@ -125,9 +125,9 @@ var withinlist = function(parcel){
             if (checkoverlap == true){within500.push(String(value.properties.ain))};}
     })
     within500 = jQuery.unique(within500);
-    console.log(within500);
+    //console.log(within500);
     map.setFilter("within500ft", ['in','ain'].concat(within500));
-    map.setFilter("hoverparcel", ['in','ain'].concat(debugprop));
+    //map.setFilter("hoverparcel", ['in','ain'].concat(debugprop));
     loadlist(within500);
     
     /*map.addLayer({
@@ -275,6 +275,6 @@ $( document ).click(function() {
 }
 
 $("#openform").click(function() {
-    console.log("test");
+    //console.log("test");
   $( "#gform" ).slideDown();
 });

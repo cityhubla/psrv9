@@ -184,6 +184,10 @@ map.on('load', function () {
     var loadlist = function (within500ft) {
             $("#info_selected").empty();
             $("#info_500ftbuffer").empty();
+			//$("#info_selected").load("./html/propertyinfo.html")
+        
+        
+        
             $.each(hazardous_data.features, function (queryfeature, value) {
                 var inlist = $.inArray(value.properties.AIN, within500ft);
                 if (inlist >= 0) {
@@ -223,6 +227,46 @@ map.on('load', function () {
             });
         };
 
+});
+
+
+//Adds a geocoder
+var geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    placeholder:"Enter your address to find what's nearby",
+    proximity:{longitude:-118.2517,latitude:34.0545}
+});
+document.getElementById('geocoder').appendChild(geocoder.onAdd(map))
+
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
+
+//Adds point to Map from geocoder results
+map.on('load', function() {
+    map.addSource('single-point', {
+        "type": "geojson",
+        "data": {
+            "type": "FeatureCollection",
+            "features": []
+        }
+    });
+
+    map.addLayer({
+        "id": "point",
+        "source": "single-point",
+        "type": "circle",
+        "paint": {
+            "circle-radius": 10,
+            "circle-color": "#007cbf"
+        }
+    });
+
+    // Listen for the `geocoder.input` event that is triggered when a user
+    // makes a selection and add a symbol that matches the result.
+    geocoder.on('result', function(ev) {
+        map.getSource('single-point').setData(ev.result.geometry);
+        
+    });
 });
 
 //Function to Toggle List and slide

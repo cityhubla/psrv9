@@ -1,0 +1,137 @@
+<html>
+<head>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<style>
+    #box{
+        width: 30%;
+    }
+.mainmenu {
+  margin: 90px auto;
+  font-size: 16px;
+  position: relative;
+  padding: 0;
+}
+
+.hazsubmenu {
+    background-color: #f9b200;
+}    
+.mainmenu > li {
+  background-color: #708090;
+  border-top: 1px solid #708090;
+  height: 48px;
+  color: #FFF;
+  box-sizing: border-box;
+    list-style: none;
+}
+
+.mainmenu > li:first-child {
+  border-top: 0;
+}
+
+.mainmenu > li:last-child { border-radius: 0 0 7px 7px; }
+
+.mainmenu > li span {
+  display: block;
+  line-height: 48px;
+    padding-left: 15px;
+}
+
+.mainmenu > li .icon {
+  padding: 14px 20px 0 20px;
+  float: left;
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.mainmenu > li .messages {
+  background: url("../images/messages.png") no-repeat;
+  padding: 0;
+  margin-top: -33px;
+  margin-right: 19px;
+  float: right;
+  display: block;
+  width: 34px;
+  height: 18px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 19px;
+}
+
+.expand-triangle {
+  background: url("../images/expand.gif") top left no-repeat;
+  height: 10px;
+  width: 276px;
+  content: " ";
+  margin-left: -40px;
+}
+    
+.submenu {
+  box-sizing: border-box;
+  color: #ae9f9f;
+  font-size: 13px;
+  content: " ";/*opacity: 0.5;*/
+}
+
+.submenu li {
+  line-height: 20px;
+  height: 35px;
+  padding-top: 11px;
+  margin-left: -40px;
+  background-color: #393a3e;
+  border-left: solid 6px #393a3e;
+  transition: border-left 220ms ease-in;
+}
+
+.submenu .chosen, .submenu .chosen:hover { border-left: solid 6px #179dd9; }
+
+.submenu li:hover { border-left: solid 6px #f9b200; }
+
+.submenu li span { 
+    margin-left: 30px; 
+    padding-left: 5px;
+}    
+    </style>
+    </head>
+<body>
+<div id="box">
+  <ul class="mainmenu">
+  <li><img src="/img/infopanel/searchmap.png" alt="search map icon" class="icon"><span>Search Map<span></li>
+    <ul class="submenu">
+      <li><div id='geocoder' class='geocoder'></div></li>
+      <li><span>Hover and click on the map to see what is within 500ft, or type your address </span></li>
+    </ul>
+  <li><img src="images/envelope.png" alt="Envelope icon" class="icon"><span>Property Information</span></li>
+    <ul class="submenu">
+      <li><span>No property information available, please select a property.</span></li>
+    </ul>
+  <li class="hazsubmenu"><img src="images/envelope.png" alt="Envelope icon" class="icon"><span>Map Settings</span></li>
+    <ul class="submenu">
+      <li><span>New</span></li>
+      <li><span>Sent</span></li>
+      <li><span>Trash</span></li>
+    </ul>
+
+
+</ul>
+</div>
+</body>
+    <script>
+    $(document).ready( function() {
+  var $submenu = $('.submenu');
+  var $mainmenu = $('.mainmenu');
+  $submenu.hide();
+  $submenu.first().delay(400).slideDown(700);
+  $submenu.on('click','li', function() {
+    $submenu.siblings().find('li').removeClass('chosen');
+    $(this).addClass('chosen');
+  });
+  $mainmenu.on('click', 'li', function() {
+    $(this).next('.submenu').slideToggle().siblings('.submenu').slideUp();
+  });
+  $mainmenu.children('li:last-child').on('click', function() {
+    $mainmenu.fadeOut().delay(500).fadeIn();
+  });
+});
+    </script>
+</html>
