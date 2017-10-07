@@ -35,6 +35,7 @@ $( ".submenu" ).click(function() {
     $( ".activemenu" ).removeClass( "activemenu" );
     var activatemenu = $(this).attr('id');
     $("div#"+activatemenu).addClass('activemenu');
+$("div#resources").load("../html/resources.html");
     $( ".navmenu" ).fadeToggle( "slow", "linear" );
    
     //$("#cover").children("div[id=']").attr("id",activatemenu).css('activemenu');           

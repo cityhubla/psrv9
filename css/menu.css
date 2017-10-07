@@ -45,11 +45,15 @@ color: #179dd9;
 }
 
 div#getinvolved{
-padding:10px
+	padding:10px;
+	max-width:70%;
+	margin:0 auto;
 }
 
 div#resources{
-padding:10px
+	padding:10px;
+	max-width:70%;
+	margin:0 auto;
 }
 
 @media screen and (max-width: 780px) {
