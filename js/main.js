@@ -1,60 +1,52 @@
 //Function for animating opening page logo and text using slick.js
-$(document).ready(function(){
-  $('.logoanimated').slick({
-        dots: false,
-        fade: true,
-        arrows:false,
-        infinite: true,
-        slidesToShow: 1,
-        autoplay: true,
-        autoplaySpeed: 2000
-  });
+$("div#menu").ready(function() {
+	$("#cover_contents").load("../html/home.html", function(){
+		animatelogo();
+	})
 });
 
-//Activates the menubar
+var animatelogo = function(){
+	$('.logoanimated').slick({
+		dots: false,
+		fade: true,
+		arrows:false,
+		infinite: true,
+		slidesToShow: 1,
+		autoplay: true,
+		autoplaySpeed: 2000
+	});
+}
+
+//Opens the menubar when user clicks on "menu"
 $( "#togglenav" ).click(function() {
     if ($('.navlogo').css('display') == 'block'){
-        $( '.navlogo' ).fadeToggle( "fast", "linear" );   
+        $( '.navlogo' ).hide();   
     }
     $( ".navmenu" ).fadeToggle( "slow", "linear" ); 
 });
 
-//Shows the map from menubar
-$( ".togglecover" ).click(function() {
-    $( "#cover" ).fadeToggle( "slow", "linear" );
-    $( ".navmenu" ).fadeToggle( "slow", "linear" );
-    $( ".navlogo" ).fadeToggle( "slow", "linear" );
-});
-
-//Shows the submenus
-$( ".submenu" ).click(function() {
-    if ($('#cover').css('display') == 'none'){
-        $( "#cover" ).fadeToggle( "slow", "linear" );
-    }
-
-    $( ".activemenu" ).removeClass( "activemenu" );
-    var activatemenu = $(this).attr('id');
-    $("div#"+activatemenu).addClass('activemenu');
-$("div#resources").load("../html/resources.html");
-    $( ".navmenu" ).fadeToggle( "slow", "linear" );
-   
-    //$("#cover").children("div[id=']").attr("id",activatemenu).css('activemenu');           
-});
-
-//Activates the menubar from cover
-$( ".toggleabout" ).click(function() {
-    if ($('#cover').css('display') == 'none'){
-        $( "#cover" ).fadeToggle( "slow", "linear" );
-    }
-
-    $( ".activemenu" ).removeClass( "activemenu" );
-    var activatemenu = "about";
-    $("div#"+activatemenu).addClass('activemenu');
- 
-});
-
-//Shows the map from cover
-$( ".togglemap" ).click(function() {
-    $( "#cover" ).fadeToggle( "slow", "linear" );
-    $( ".navlogo" ).fadeToggle( "slow", "linear" );
-});
+//When user clicks on menu item, loads content using jQuery fadetoggle
+$(".submenu").click(function(){
+	$( ".navmenu" ).hide(); 
+	var loadhtml = $(this).attr('id'); //Listens for button clicked
+	if ( loadhtml == "gotomap" ){ //If user selected map, hides #cover
+		$("#cover").fadeOut( "slow", "linear", function() {$("#cover_contents").empty() });
+		$( ".navlogo" ).fadeToggle( "slow", "linear" );
+	} else if ( loadhtml == "home" ){ //If user selected home, hides activates animation
+		$("#cover").fadeIn( "slow", "linear"); //This loads the #cover if user is coming from map
+		$("#cover_contents").fadeToggle( "slow", "linear", function(){
+			$("#cover_contents").empty().load("../html/home.html", function(){
+				$("#cover_contents").fadeToggle( "slow", "linear");
+				animatelogo();
+			});	
+		})
+	}
+	else { //If user selected an item on the menu, fade loads the page
+		$("#cover").fadeIn( "slow", "linear"); //This loads the #cover if user is coming from map
+		$("#cover_contents").fadeToggle( "slow", "linear", function(){
+			$("#cover_contents").empty().load("../html/"+loadhtml+".html", function(){
+				$("#cover_contents").fadeToggle( "slow", "linear");			
+			});	
+		})
+	}
+})

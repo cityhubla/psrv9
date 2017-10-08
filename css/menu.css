@@ -1,4 +1,5 @@
 /*Why 500ft About Area*/
+
 .about {
 display:none;
 }
@@ -44,17 +45,6 @@ color: #179dd9;
     display:block
 }
 
-div#getinvolved{
-	padding:10px;
-	max-width:70%;
-	margin:0 auto;
-}
-
-div#resources{
-	padding:10px;
-	max-width:70%;
-	margin:0 auto;
-}
 
 @media screen and (max-width: 780px) {
 .why500 {

@@ -10,13 +10,16 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
     <link href="css/main.css" rel='stylesheet'>
-    <link href="css/menu.css" rel='stylesheet'>
+    
     <link href="css/map.css" rel='stylesheet'>
     <link rel='stylesheet' href='css/mapbox-gl-geocoder_modified.css' type='text/css' />
     <link href="css/infopanel.css" rel='stylesheet'>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
     <script src='js/mapbox-gl-geocoder_modified.js'></script>
     <script src="js/vendor/turf.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     
 
 </head>
@@ -31,11 +34,14 @@
             <button class="menubutton submenu" id="toolkits"> toolkits |</button>
             <button class="menubutton submenu" id="getinvolved"> get involved |</button>
             <button class="menubutton submenu" id="about"> about |</button>
-            <button class="menubutton togglecover" id="gotomap"> map |</button>
+            <button class="menubutton submenu" id="gotomap"> map |</button>
+			<button class="menubutton submenu" id="home"> home |</button>
         </div>
     </div>
     <div id="main">
-        <div class="cover" id="cover"></div>
+        <div class="cover" id="cover">
+			<div id="cover_contents"></div>
+		</div>
         <div id="map_panel">
             <div id="map"></div>
             <div id="map_info">
@@ -58,10 +64,6 @@
                     <a href="https://www.youtube.com/user/PSRLA"><img src="img/youtube.png"></a>
                     <br> MADE POSSIBLE BY | <a href="http://www.calendow.org/">THE CALIFORNIA ENDOWMENT</a></p>
     </div>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-	<script>$("div#cover").load("html/cover.html");</script>
     <script src="js/map.js"></script>
     <script src="js/main.js"></script>
 </body>
