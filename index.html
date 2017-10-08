@@ -10,13 +10,16 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
     <link href="css/main.css" rel='stylesheet'>
-    <link href="css/menu.css" rel='stylesheet'>
+    
     <link href="css/map.css" rel='stylesheet'>
     <link rel='stylesheet' href='css/mapbox-gl-geocoder_modified.css' type='text/css' />
     <link href="css/infopanel.css" rel='stylesheet'>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
     <script src='js/mapbox-gl-geocoder_modified.js'></script>
     <script src="js/vendor/turf.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     
 
 </head>
@@ -31,156 +34,23 @@
             <button class="menubutton submenu" id="toolkits"> toolkits |</button>
             <button class="menubutton submenu" id="getinvolved"> get involved |</button>
             <button class="menubutton submenu" id="about"> about |</button>
-            <button class="menubutton togglecover" id="gotomap"> map |</button>
+            <button class="menubutton submenu" id="gotomap"> map |</button>
+			<button class="menubutton submenu" id="home"> home |</button>
         </div>
     </div>
     <div id="main">
         <div class="cover" id="cover">
-            <div class='logo activemenu' id="menu">
-                <h1>Are you within 500ft?</h1>
-                <div style="position:relative">
-                <img src="img/why500ft-17.png" style="display: inline-block" />
-                <div class="logoanimated" style="position: absolute; display: inline-block; width: 100px;">
-                                <div><img src="img/haz/haz_mfg.png" style="display: inline-block;max-width: 100px" /></div>
-                                <div><img src="img/haz/haz_autopaint.png" style="display: inline-block;max-width: 100px" /></div>
-                                <div><img src="img/haz/haz_autorepair.png" style="display: inline-block;max-width: 100px" /></div>
-                                <div><img src="img/haz/haz_dryclean.png" style="display: inline-block;max-width: 100px" /></div>
-                                <div><img src="img/haz/haz_mfg.png" style="display: inline-block;max-width: 100px" /></div>
-                                <div><img src="img/haz/haz_gas.png" style="display: inline-block;max-width: 100px" /></div>
-                                <div><img src="img/haz/haz_waste.png" style="display: inline-block;max-width: 100px" /></div>
-                                <div><img src="img/haz/haz_recycle.png" style="display: inline-block;max-width: 100px" /></div>
-                                <div><img src="img/haz/haz_construction.png" style="display: inline-block;max-width: 100px" /></div>
-                                <div><img src="img/haz/haz_warehouse.png" style="display: inline-block;max-width: 100px" /></div>
-                                <div><img src="img/haz/haz_transportation.png" style="display: inline-block;max-width: 100px" /></div>
-                </div>
-                </div>
-                <div class="logoanimated">
-                    <div>of a Hazardous Facility?</div>
-                    <div>of an Auto Paint and Body?</div>
-                    <div>of an Auto and Truck Repair?</div>
-                    <div>of a Dry Cleaners?</div>
-                    <div>of Manufacturing?</div>
-                    <div>of a Gas Station?</div>
-                    <div>of a Hazardous and Solid Waste facility?</div>
-                    <div>of a Recycling facility?</div>
-                    <div>of a Construction facility?</div>
-                    <div>of a Warehouse facility?</div>
-                    <div>of a Transportation facility?</div>
-                </div>
-                <div class="logo_btn">    
-                <button class="btn toggleabout">Why 500ft?</button>
-                <button class="btn togglemap">Find out</button>
-                </div>    
-            </div>
-            <div class='about' id='about'>
-                        <div class='cover_section'>
-                            <h1>Why 500ft?</h1>
-                        </div>
-                        <div class='why500'>
-                            <img src="img/about/why500ft-03.png">
-                            <span>In the communities of the South and Southeast LA Community plans of the City of Los Angeles</span>
-                        </div>
-                        <div class='why500'>
-                                <img src="img/about/why500ft-14.png">
-                                <span>There are Sensitive uses where you find high concentrations of people who 
-                                    are most vulnerable to toxic exposures. This includes schools health clinics and recreation centers</span>
-                        </div>
-                        <div class="why500">
-                                <img src="img/about/why500ft-13.png">
-                                <span>These uses are in proximity to Hazardous uses which is a facility or site 
-                                    that produces toxic emissions through air, land or water. These include hazardous waste facilities as well as auto-body shops</span>
-                        </div>
-                        <div class="why500">
-                                <img src="img/about/why500ft-15.png">
-                                <span>Research has shown that living within <b>500 feet</b> of a stationary source of pollution, your risk to health may increase.</span>
-                        </div>
-                        <div class="why500">
-                                <img src="img/about/why500ft-16.png">
-                                <span>If you or your family are exposed to these conditions, you may start experiencing symptoms like asthma, cardiovascular disease, and even cancer.</span>
-                        </div>
-                        <div class='why500'>
-                            <img src="img/logo.png">
-                            <span> is a Hazard Mapping tool for the South Central Los Angeles community to identify sensitive areas in proximity to hazardous land uses.</span>
-                        </div>
-                        <div class='why500_lower'>
-                                <button class="btn" onclick="covertoggle()">Learn how to use this tool</button>
-                                <button class="btn togglemap">Start using this tool</button>
-                        </div>
-            
-            </div>
-            
-            <div class="about" id="getinvolved">
-            <h1>get involved</h1>
-            <p>Are you a South LA Resident? A community advocate? An inquisitive student? There are opportunities for everyone to get involved. Here are 5 ways you can be a part of our project:</p>
-                <p>Create a ground-truthing team.</p>
-                <p>The 500 Feet Project is a large scale effort to map and validate incompatible land uses in South LA. A project of this scale needs your help! Whether you are a local nonprofit, a network of community members, or a group of students working on a class project, we can work together to add your voice to the map. Together, we’ll determine the geographic area you will be ground-truthing, conduct trainings on what to look for on the ground, and brainstorm ways to add your concerns and insights to the map.</p>
-<p>2. Share your story.</p>
-<p>Does your child walk by a highly polluting oil drilling site on his or her way to school? Does your asthma act up every time you go for a jog down the high traffic road nearby? Our map can only say so much about incompatible land uses. Your stories speak volumes about the real-life impacts of industry on health, well-being, and safety in a community. We need your story in order to give a face and a voice to those within 500 Feet.</p>
-<p>3. Provide feedback.</p>
-<p>The 500 Feet Project always has room to grow and improve. We want to hear your thoughts on what worked and what didn’t work. What did you find confusing? What did you find particularly compelling? Send us an email with your thoughts on the current version of our map and let us know if there’s anything we can improve!</p>
-<p>4. Spread the word.</p>
-<p>We want to get as many folks involved in this effort as possible. Share the 500 Feet Project with your networks and spread the word. We hope that this project becomes a tool that health advocates, community residents, and educational institutions can learn from and contribute to. But we need your voice and your networks to make that happen.
-<p>5. Imagine the future.</p>
-<p>Our vision is to create a healthy, sustainable, and equitable South LA. What’s yours? Tell us how you imagine the future of industry in South LA.</p>
-            
-            </div>
-            <div class="about" id="toolkits">
-            <h1>toolkits</h1>
-            </div>
-            
-            <div class="about" id="resources">
-            <h1>resources</h1>
-
-<p>This map provides but a snapshot of the complex story of industry in South-Central Los Angeles. How has industry in Los Angeles changed over time? What is the connection between industry and health? How can policy be leveraged to protect communities from harmful industries while supporting equitable, sustainable development?  Check out our resources below to explore this story through various lenses.</p>
-<h2>Health</h2>
-<p>Health Atlas for the City of Los Angeles - From environmental conditions to land use analysis to the “hardship index”, the Health Atlas provides valuable insight into the relationship between health and the built environment. The Health Atlas also reveals jarring health disparities within Los Angeles County, with South Los Angeles demonstrating higher rates of mortality, diabetes, asthma, and other chronic conditions. Explore the Health Atlas to find out more about what health looks like in different parts of Los Angeles.</p>
-Environmental Justice Screening Method - How does one assess the cumulative impact of an array of environmental hazards? Is there a way to holistically assess health disparities in low income communities of color and other vulnerable communities? The Environmental Justice Screening Method seeks to answer these questions, framing these disparities through the lens of environmental justice.</p>
-<p>CalEnviroScreen 3.0 - Another excellent resource which was a huge inspiration for the 500 Feet Project. CalEnviroScreen is a tool created to visualize the burden of pollution on different communities in California. It combines environmental, health, and socioeconomic data to generate a “score” which attempts to capture the cumulative impact of environmental conditions in every census tract in the state. According to CalEnvrioScreen, South Los Angeles is in the top 5-10% most environmentally burdened areas in all of California.</p>
-<h2>Policy</h2>
-<p>Clean Up Green Up - Three neighborhoods in Los Angeles-- Boyle Heights, Pacoima, and Wilmington-- are the sites for an innovative policy which seeks to reduce pollution, prevent future pollution, and jumpstart sustainable and equitable development in communities long considered “toxic hotspots”. The 500 Feet Project seeks to build off of the momentum of CUGU and expand the reach of this policy to South Los Angeles.</p>
-<p>Hidden Hazards Report - Emerging out of a powerful partnership between the LA Collaborative for Environmental Health & Justice and the Liberty Hill Foundation, this report has informed not only the 500 Feet Project’s own research methodology, but also helped inspire the Clean Up Green Up Policy. Read this report to get an insight into the research and methodology behind community-based research and policy development.</p>
-<h2>History</h2>
-<p>Want to learn more about the history of industry in South LA? Check out some of the following links:</p>
-<p>Planning a healthy South LA: What’s industry got to do with it?</p>
-<p>Land Use in South L.A.: A Legacy of Environmental Crime</p>
-<p>Environmental Justice History in Los Angeles - A popplet!</p>
-<p>Do you have resources to contribute? Send them over! We are always looking to add to the conversation. </p>   
-            </div>
-        
-        <div class="about" id="faq">
-            <h1>FAQ</h1>
-<p>So we'll jump right in and ask the question on everyone’s mind, why only 500 Feet?
-<p>Excellent question! The 500 Feet buffer is a number that we greatly deliberated over. The California Air Resources Board’s Air Quality and Land Use Handbook states that “sensitive land uses be sited no closer than 500 feet from a freeway or major roadway, a buffer area that was developed to protect sensitive receptors from exposure to diesel [particulate matter].” Research shows that there is a 70% decrease in particulate matter after 500 feet, a decrease that greatly affects air quality and health outcomes. Building off this data, we decided to set 500 feet as a baseline to visualize the minimum impact of an incompatible land use on surrounding communities. Though this buffer does not by any means capture all potential impact of industrial hazards, it allows us to visualize the most egregious and pressing incompatibilities. This ultimately allows us to craft policy that is geared towards protecting the most vulnerable communities in Los Angeles.
-<p>How did you decide what counted as a sensitive use?
-<p>Our project is part of a greater conversation on industry and health in South Los Angeles. We drew from the following definition from the California Air Resources Board’s Air Quality and Land Use Handbook:
-<p>“Sensitive individuals refer to those segments of the population most susceptible to poor air quality (i.e., children, the elderly, and those with pre-existing serious health problems affected by air quality). Land uses where sensitive individuals are most likely to spend time include schools and schoolyards, parks and playgrounds, daycare centers, nursing homes, hospitals, and residential communities (sensitive sites or sensitive land uses).” (2)
-<p>Liberty Hill’s Hidden Hazards Report builds upon this definition to include community knowledge of places where vulnerable populations, adding informal home-based daycare sites, churches, senior centers to the list of sensitive uses. We combined the above two definitions to create a list which captures both the official definition of “sensitive use” as well as sensitive uses as articulated by community members.
-<p>And of course, as we integrate more and more community voices and concerns, it is possible that these parameters may change.
-        
-        </div>
-        <div class="about" id="contact">
-        <h1>CONTACT</h1>
-        <p>For more information or to share your thoughts, please contact Monika Shankar, Land Use and Health Coordinator at Physicians for Social Responsibility-Los Angeles.
-        <p>Monika Shankar<br>
-        mshankar@psr-la.org<br>
-        617 S. Olive Street, Ste. 1100<br>
-        Los Angeles, CA 90014<br>
-        </div>
-            
-        </div>
+			<div id="cover_contents"></div>
+		</div>
         <div id="map_panel">
             <div id="map"></div>
             <div id="map_info">
                 <div id='infopanel'>
                     <div id='geocoder' class='geocoder'></div>
                     <div id='scrollinfo'>    
-                        <div id='info_1'>
-                        Hover and click on the map to see what is within 500ft, or type your address                   
-                        </div>
-                        <div id='info_selected'>                   
-                        </div>        
-                        <div id='info_500ftbuffer'>                   
-                        </div>
+                        <div id='info_1'>Hover and click on the map to see what is within 500ft, or type your address</div>
+                        <div id='info_selected'></div>        
+                        <div id='info_500ftbuffer'></div>
                     </div>
                 </div>
             </div>
@@ -194,9 +64,6 @@ Environmental Justice Screening Method - How does one assess the cumulative impa
                     <a href="https://www.youtube.com/user/PSRLA"><img src="img/youtube.png"></a>
                     <br> MADE POSSIBLE BY | <a href="http://www.calendow.org/">THE CALIFORNIA ENDOWMENT</a></p>
     </div>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     <script src="js/map.js"></script>
     <script src="js/main.js"></script>
 </body>
