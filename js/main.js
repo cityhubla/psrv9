@@ -1,6 +1,6 @@
 //Function for animating opening page logo and text using slick.js
 $("div#menu").ready(function() {
-	$("#cover_contents").load("../html/home.html", function(){
+	$("#cover_contents").load("./html/home.html", function(){
 		animatelogo();
 	})
 });
