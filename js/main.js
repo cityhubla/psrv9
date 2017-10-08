@@ -35,7 +35,7 @@ $(".submenu").click(function(){
 	} else if ( loadhtml == "home" ){ //If user selected home, hides activates animation
 		$("#cover").fadeIn( "slow", "linear"); //This loads the #cover if user is coming from map
 		$("#cover_contents").fadeToggle( "slow", "linear", function(){
-			$("#cover_contents").empty().load("html/home.html", function(){
+			$("#cover_contents").empty().load("./html/home.html", function(){
 				$("#cover_contents").fadeToggle( "slow", "linear");
 				animatelogo();
 			});	
@@ -44,7 +44,7 @@ $(".submenu").click(function(){
 	else { //If user selected an item on the menu, fade loads the page
 		$("#cover").fadeIn( "slow", "linear"); //This loads the #cover if user is coming from map
 		$("#cover_contents").fadeToggle( "slow", "linear", function(){
-			$("#cover_contents").empty().load("html/"+loadhtml+".html", function(){
+			$("#cover_contents").empty().load("./html/"+loadhtml+".html", function(){
 				$("#cover_contents").fadeToggle( "slow", "linear");
 			});	
 		})
@@ -61,7 +61,7 @@ var loadmap = function(){
 var loadabout = function(){
 	$("#cover").fadeIn( "slow", "linear"); //This loads the #cover if user is coming from map
 	$("#cover_contents").fadeToggle( "slow", "linear", function(){
-		$("#cover_contents").empty().load("html/about.html", function(){
+		$("#cover_contents").empty().load("./html/about.html", function(){
 			$("#cover_contents").fadeToggle( "slow", "linear");
 		});	
 	})
