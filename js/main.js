@@ -45,8 +45,24 @@ $(".submenu").click(function(){
 		$("#cover").fadeIn( "slow", "linear"); //This loads the #cover if user is coming from map
 		$("#cover_contents").fadeToggle( "slow", "linear", function(){
 			$("#cover_contents").empty().load("../html/"+loadhtml+".html", function(){
-				$("#cover_contents").fadeToggle( "slow", "linear");			
+				$("#cover_contents").fadeToggle( "slow", "linear");
 			});	
 		})
 	}
 })
+
+//Add listener to home page buttons
+
+var loadmap = function(){
+	$("#cover").fadeOut( "slow", "linear", function() {$("#cover_contents").empty() });
+	$( ".navlogo" ).fadeToggle( "slow", "linear" );
+}
+
+var loadabout = function(){
+	$("#cover").fadeIn( "slow", "linear"); //This loads the #cover if user is coming from map
+	$("#cover_contents").fadeToggle( "slow", "linear", function(){
+		$("#cover_contents").empty().load("../html/about.html", function(){
+			$("#cover_contents").fadeToggle( "slow", "linear");
+		});	
+	})
+}

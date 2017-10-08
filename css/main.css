@@ -222,11 +222,12 @@ background-color: #393a3e;
 
 
 .logo {
+	width:55vw;
     margin: 0 auto;
     padding-top: 3vh;
 }
 
-.logo img{
+.logo img {
 max-width:100px;
 }
 
@@ -235,16 +236,17 @@ max-width:100px;
     text-align: left;
     font-size:30px;
 }
-.logo p{
+
+.logo p {
 text-align: center;
 padding-top: 10px;
 }
 
-.logo_btn{
+.logo_btn {
 text-align: center;
 }
 
-.btn{
+.btn {
     font-family: inherit;
     font-size: inherit;
     background: none;
@@ -326,7 +328,11 @@ text-align: center;
     font-size: 1em;
 }
 
-	.logo h1 {
+.logo {
+	width:100%;
+}
+	
+.logo h1 {
 	font-size: 4em;
 }
 
