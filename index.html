@@ -46,10 +46,15 @@
             <div id="map"></div>
             <div id="map_info">
                 <div id='infopanel'>
-                    <div id='geocoder' class='geocoder'></div>
-                    <div id='scrollinfo'>    
-                        <div id='info_1'>Hover and click on the map to see what is within 500ft, or type your address</div>
-                        <div id='info_selected'></div>        
+						<div id='maptabs'>
+							<button class="maptab_button" id="searchmap">Search Map</button>
+							<button class="maptab_button" id="infotab">Map Results</button>
+							<button class="maptab_button" id="mapoptions">Map Settings</button>
+						</div>
+                    <!--div id='geocoder' class='geocoder'></div-->
+                    <div id='scrollinfo'>
+						<!--div id='searchmap_page'>Hover and click on the map to see what is within 500ft, or type your address</div>
+                        <div id='info_selected'></div-->        
                         <div id='info_500ftbuffer'></div>
                     </div>
                 </div>

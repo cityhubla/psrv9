@@ -236,7 +236,7 @@ var geocoder = new MapboxGeocoder({
     placeholder:"Enter your address to find what's nearby",
     proximity:{longitude:-118.2517,latitude:34.0545}
 });
-document.getElementById('geocoder').appendChild(geocoder.onAdd(map))
+//document.getElementById('geocoder').appendChild(geocoder.onAdd(map))
 
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());

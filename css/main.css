@@ -204,6 +204,34 @@ background-color: #393a3e;
     float: right;
 }
 
+#maptabs{
+	position:relative;
+	max-width: 100vw;
+}
+.maptab_button {
+    font-family: 'Poppins';
+    font-size: 1em;
+    background: none;
+    cursor: pointer;
+    padding: 5px 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+    outline: none;
+    position: relative;
+    transition: all 0.3s;
+    border: 2px solid #fff;
+    color: #fff;
+    overflow: hidden;
+    width: 33.33333333%;
+    float: left;
+}
+
+.maptab_button:hover {
+    border: 2px solid #f9b200;
+	color: #f9b200
+}
+
 /*map panel end*/
 
 
@@ -266,7 +294,8 @@ text-align: center;
 }
 
 .btn:hover {
-    background: #708090;
+    border: 3px solid #f9b200;
+	color: #f9b200;
 }
 
 
@@ -302,7 +331,7 @@ text-align: center;
     width: 100%;
     position: fixed;
     height: 100vh;
-    top: 0px;
+    top: 50px;
 }
     
 #map_info{
