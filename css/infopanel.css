@@ -39,6 +39,7 @@
     height:100%;
 	position: relative;
     float: left;
+    display:none;
 }
 
 #info_500ftbuffer {

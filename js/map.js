@@ -14,7 +14,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiaGhwc3JsYSIsImEiOiJjaW1sanhqa3kwNmdidHZtMHEyZ
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/hhpsrla/cj7rai1ewdtfa2rl54tznh7bs',
-    zoom: 9,
+    zoom: 11,
     minZoom: 9,
     center: [-118.2751, 33.9843], //Centers in middle of both community plans
     hash: true
@@ -236,7 +236,7 @@ var geocoder = new MapboxGeocoder({
     placeholder:"Enter your address to find what's nearby",
     proximity:{longitude:-118.2517,latitude:34.0545}
 });
-//document.getElementById('geocoder').appendChild(geocoder.onAdd(map))
+document.getElementById('geocoder').appendChild(geocoder.onAdd(map))
 
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());

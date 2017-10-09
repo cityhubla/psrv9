@@ -66,3 +66,10 @@ var loadabout = function(){
 		});	
 	})
 }
+
+//Listener to change tabs
+$( ".maptab_button" ).click(function() {
+    var selectedtab = $(this).attr('id');
+    console.log(selectedtab);
+    $( "div#"+selectedtab ).toggle(); 
+});
