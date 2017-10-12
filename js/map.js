@@ -1,6 +1,9 @@
 //Global Variables
 var selectedapn;
 var selectedaddress;
+var within500 = [];
+var sensitive_count = 0;
+var hazardous_count = 0;
 var hazardous_data = {type: 'FeatureCollection', features: []};
 var sensitive_data = {type: 'FeatureCollection', features: []};
 //The following functions load and parse google sheet feeds to the map    
@@ -162,8 +165,9 @@ map.on('load', function () {
         var buffer500 = turf.buffer(parcel, 0.094697, 'miles');
         map.getSource('500ftsource').setData(buffer500);
     //
-        var within500 = [], //Creates an empty array to fill with parcels within 500ft of user selected buffer
-            geom = turf.getGeom(buffer500), //Gets the geometry of the user selected parcel
+        //Creates an empty array to fill with parcels within 500ft of user selected buffer
+		within500 = [];
+        var geom = turf.getGeom(buffer500), //Gets the geometry of the user selected parcel
             queryfeatures = map.queryRenderedFeatures({ layers: ['assessor_3'] }); //Gets a list of features rendered in the current view of the map
     //Turf Function to loop through each parcel in the current view of the map if it crosses or is contained by the user selected buffer
         $.each(queryfeatures, function (queryfeature, value) {
@@ -176,17 +180,21 @@ map.on('load', function () {
         });
         within500 = jQuery.unique(within500);
         map.setFilter("within500ft", ['in', 'ain'].concat(within500));
-        console.log(within500);
-        loadlist(within500);
+        //console.log(within500);
+        loadlist(within500, parcel);
     };
 
 //Function to load information panel with content
-    var loadlist = function (within500ft) {
-            $("#info_selected").empty();
-            $("#info_500ftbuffer").empty();
+    var loadlist = function (within500ft, parcel) {
+            $("#mapresults_list").empty();
+            $("div#info_500ftbuffer").empty();
+			hazardous_count = 0;
+			sensitive_count = 0;
 			//$("#info_selected").load("./html/propertyinfo.html")
-        
-        
+			//console.log(parcel);
+			
+			console.log(parcel);
+			$("button#mapresults").trigger("click");
         
             $.each(hazardous_data.features, function (queryfeature, value) {
                 var inlist = $.inArray(value.properties.AIN, within500ft);
@@ -195,7 +203,7 @@ map.on('load', function () {
                     if (typeof value.properties.siccoded !== 'undefined') {
                         siccode = value.properties.siccoded;
                     } else {siccode = "Facilty"; }
-                    $("#info_500ftbuffer").append(
+                    $("div#info_500ftbuffer").append(
                         "<div class='epa_locations' onclick='togglelist(this)' onmouseover='highlightparcel(" + value.properties.AIN + ")'><img src='img/hazicon.png'><span>" + siccode + "</span>" +
                             "<div class='sublist'><p class='usetitle'>Name: " + value.properties.primaryna +
                             "<p>Address: " + value.properties.locationa +
@@ -204,6 +212,7 @@ map.on('load', function () {
                             "<p><a href=" + value.properties.frsfacil + ">EPA Page Link</a></p>" +
                             "<p id='openform'>Is this information correct?</p></div></div>"
                     );
+					hazardous_count = hazardous_count + 1;
         
                 }
             });
@@ -215,20 +224,63 @@ map.on('load', function () {
                     if (typeof value.properties.cat2 !== 'undefined') {
                         siccode = value.properties.cat2;
                     } else {siccode = "Sensitive Use"; }
-                    $("#info_500ftbuffer").append(
+                    $("div#info_500ftbuffer").append(
                         "<div class='lms_locations' onclick='togglelist(this)' onmouseover='highlightparcel(" + value.properties.AIN + ")'><img src='img/sensicon.png'><span>" + value.properties.cat2 + "</span>"
                             + "<div class='sublist'><p class='usetitle'>Name: " + value.properties.name +
                             "<p>Address: " + value.properties.addrln1 +
                             "<p>Description: " + value.properties.descriptio +
                             "<p>Source: LACOUNTY Points of Interest (LMS Data)</div></div>"
                     );
-        
+        			sensitive_count = sensitive_count + 1;
+					console.log(sensitive_count);
                 }
             });
+		getselectedparcel(parcel);
         };
 
 });
 
+//Load selected parcel information
+var getselectedparcel = function(parcel){
+	var countuses = 0
+	$.each(hazardous_data.features, function (queryfeature, value) {
+		if (value.properties.AIN==parcel.properties.ain){
+			countuses = countuses + 1;
+		}
+	});
+	$.each(sensitive_data.features, function (queryfeature, value) {
+		if (value.properties.AIN==parcel.properties.ain){
+			countuses = countuses + 1;
+		}
+	});
+	getstreetview(parcel);
+	console.log(within500)
+	$("#mapresults_list").append(
+		"<div class='parcel_selected'>This " + parcel.properties["2015p_Gene"] + " property has " + countuses + " uses.</div>"+
+		"<div class='parcel_selected_form' onclick='fillform()'>If this is incorrect, click here to help us update our data.</div>"+
+		"<div class='parcel_selected'>Within 500ft there are " +within500.length+ " properties with </div>"+
+		"<div class='parcel_uses'><img src='img/why500ft-17.png'><span>" +sensitive_count+ " sensitive uses</span></div>"+
+		"<div class='parcel_uses'><img src='img/haz/haz_mfg.png'><span>" +hazardous_count+ " hazardous uses</span></div>"
+	);
+};
+
+//Loads sensitive and hazardous data
+
+
+//Get google streetview return html for image load
+var getstreetview = function(parcel){
+	var getcentroid = turf.centroid(parcel);
+	/*var imagecheck = $.getJSON("https://maps.googleapis.com/maps/api/streetview/metadata?size=400x200&location=" + getcentroid.geometry.coordinates[1] + "," + getcentroid.geometry.coordinates[0] + "&key=AIzaSyCu4adL3bWUY41EXY7rxMrhGaOJ9AvWibE",function(data){ 
+		console.log(data);
+		return data.status;
+	});
+	console.log(imagecheck);
+	if (imagecheck.status=='ZERO_RESULTS'){
+		$("#mapresults_list").html("<div class='mapresults_googlestreetview'><div class='mapresults_nogoogleimage'><div class='mapresults_address'>123 Main St</div></div>");
+	} else {*/
+	
+	$("#mapresults_list").append("<div class='mapresults_googlestreetview'><img id='googlestreetview' src='https://maps.googleapis.com/maps/api/streetview?size=400x200&location=" + getcentroid.geometry.coordinates[1] + "," + getcentroid.geometry.coordinates[0] + "&key=AIzaSyCu4adL3bWUY41EXY7rxMrhGaOJ9AvWibE'><div class='mapresults_address'>123 Main St</div></div>");
+}
 
 //Adds a geocoder
 var geocoder = new MapboxGeocoder({

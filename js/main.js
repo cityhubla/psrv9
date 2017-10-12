@@ -67,9 +67,19 @@ var loadabout = function(){
 	})
 }
 
+var start_maptab = "searchmap"
 //Listener to change tabs
 $( ".maptab_button" ).click(function() {
     var selectedtab = $(this).attr('id');
-    console.log(selectedtab);
-    $( "div#"+selectedtab ).toggle(); 
+	$( ".btn_active").removeClass("btn_active");
+	$( this ).addClass("btn_active");
+    $( "div#"+start_maptab ).hide(); 
+	$( "div#"+selectedtab ).show();
+	start_maptab=selectedtab;
 });
+
+var fillform = function(){
+	$("#mapresults_list").hide();
+	$("#correction_form").load("./html/correction_form.html");
+	$("#correction_form").show("./html/correction_form.html");
+}

@@ -11,7 +11,7 @@
 }
 
 #info_1 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
 	font-size: 1.25em;
     position: relative;
     max-width: 100%;
@@ -23,7 +23,7 @@
 }
 
 #info_selected {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
 	font-size: 1.25em;
     position: relative;
     max-width: 100%;
@@ -42,16 +42,17 @@
     display:none;
 }
 
-#info_500ftbuffer {
-    font-family: 'Poppins', sans-serif;
+.info_500ftbuffer {
+    font-family: 'Poppins';
 	font-size: 1em;
     position: relative;
     max-width: 100%;
     max-height: 50%;
-    display: block;
+    display: none;
     padding: 0px 0px 0px 0px;
     line-height: 1;
     color: white;
+	margin-bottom: 25vh;
     
 }
 
@@ -117,8 +118,75 @@
     background-color: #2a3137;
 } 
 
+.mapresults_googlestreetview img{
+	max-width: 100%;
+	width:800px;
+	filter: brightness(75%);
+}
+
+.mapresults_address {
+	font-family: 'poppins';
+	position: absolute;
+	top:0;
+	padding:10px;
+	font-size: 2em;
+	font-weight: 700;
+	color:white;
+}
+
+.mapresults_nogoogleimage{
+	max-width: 100%;
+	height:200px;
+}
+
+.parcel_selected{
+	font-family: 'Poppins';
+    font-size: 1.5em;
+    position: relative;
+    max-width: 100%;
+    display: block;
+    line-height: 1;
+    color: white;
+	padding: 5px;
+}
+
+.parcel_selected_form{
+	font-family: 'Poppins';
+    font-size: .75em;
+    position: relative;
+    max-width: 100%;
+    display: block;
+    line-height: 1;
+    color: white;
+	padding: 5px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.parcel_selected_form:hover{
+	color: #f9b200;
+}
+
+.parcel_uses img{
+	height:50px;
+	vertical-align: middle;
+}
+
+.parcel_uses span{
+	font-family: 'Poppins';
+    font-size: 1.75em;
+    color: white;
+	padding-left: 5px;
+	vertical-align: -webkit-baseline-middle;
+}
+
+.parcel_correction_form{
+	display:none;
+}
+
 @media screen and (max-width: 780px) {
 #infopanel{
-width:100%
-}
+	width:100%;
+	border-style: none;
+	}
 }
