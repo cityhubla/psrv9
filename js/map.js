@@ -19,8 +19,7 @@ var map = new mapboxgl.Map({
     style: 'mapbox://styles/hhpsrla/cj7rai1ewdtfa2rl54tznh7bs',
     zoom: 11,
     minZoom: 9,
-    center: [-118.2751, 33.9843], //Centers in middle of both community plans
-    hash: true
+    center: [-118.2751, 33.9843] //Centers in middle of both community plans
 });
 
 //Creates an empty feature for highlighting a selected parcel
@@ -187,6 +186,7 @@ map.on('load', function () {
 //Function to load information panel with content
     var loadlist = function (within500ft, parcel) {
             $("#mapresults_list").empty();
+            $("button#mapresults").trigger("click")
             $("div#info_500ftbuffer").empty();
 			hazardous_count = 0;
 			sensitive_count = 0;

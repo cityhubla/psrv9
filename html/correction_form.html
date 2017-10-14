@@ -3,25 +3,29 @@
     <h3>Does this property have a sensitive or hazardous use?</h3>
     <h4>Fill out this form to the best of your knowledge</h4>
     <fieldset>
-      <input placeholder="What is the name of the use?" type="text" tabindex="1" required>
+      <input placeholder="What is the name of the use?" type="text" tabindex="1">
     </fieldset>
     <fieldset>
-      <input placeholder="What is the address?" type="text" tabindex="1" required>
+      <input placeholder="What is the address?" type="text" tabindex="1">
     </fieldset>
     <fieldset>
-      <input placeholder="Is it sensitive or hazardous?" type="text" tabindex="1" required>
+      <input placeholder="Is it sensitive or hazardous?" type="text" tabindex="1">
     </fieldset>
     <fieldset>
-		<textarea placeholder="What do you see | hear | smell?" type="text" tabindex="5" required></textarea>
+		<textarea placeholder="What do you see | hear | smell?" type="text" tabindex="5"></textarea>
     </fieldset>
     <fieldset>
-      <input placeholder="Your Name" type="text" tabindex="1" required>
+      <input placeholder="Your Name (Optional)" type="text" tabindex="1">
     </fieldset>
 	<fieldset>
-      <input placeholder="Your Email" type="text" tabindex="1" required>
+      <input placeholder="Your Email (Optional)" type="text" tabindex="1">
     </fieldset>  
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" onclick='submitgoogle()' data-submit="...Sending">Submit</button>
+        <button type="button" onclick='return $("button#mapresults").trigger("click")'>Cancel</button>
+    </fieldset>
+    <fieldset>
+      
     </fieldset>
   </form>
 </div>

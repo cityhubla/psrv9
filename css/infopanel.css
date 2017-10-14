@@ -174,7 +174,7 @@
 
 .parcel_uses span{
 	font-family: 'Poppins';
-    font-size: 1.75em;
+    font-size: 1.5em;
     color: white;
 	padding-left: 5px;
 	vertical-align: -webkit-baseline-middle;
@@ -183,6 +183,34 @@
 .parcel_correction_form{
 	display:none;
 }
+
+#searchmap_info{
+    font-family:'Poppins';
+    color:white;
+}
+
+.searchmap_key {
+    max-width:100%;
+    margin-bottom: 5px;
+}
+
+.searchmap_icon {
+    height:30px;
+    width:30px;
+    display:inline-block;
+    vertical-align: middle;
+}
+
+.searchmap_key span {
+    padding-left: 5px;
+}
+
+.key_sensitive{ background-color: #f9b200}
+.key_hazardous{ background-color: #179dd9}
+.key_residential{ background-color: #faf3e0}
+.key_industrial{ background-color: #cddae0}
+.key_commercial{ background-color: #e1cbcb}
+.key_other{ background-color: #dad8d8}
 
 @media screen and (max-width: 780px) {
 #infopanel{

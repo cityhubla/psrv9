@@ -5,6 +5,11 @@ $("div#menu").ready(function() {
 	})
 });
 
+$("div#searchmap_info").ready(function() {
+	$("div#searchmap_info").load("./html/searchmap_info.html", function(){
+	})
+});
+
 var animatelogo = function(){
 	$('.logoanimated').slick({
 		dots: false,
@@ -75,6 +80,7 @@ $( ".maptab_button" ).click(function() {
 	$( this ).addClass("btn_active");
     $( "div#"+start_maptab ).hide(); 
 	$( "div#"+selectedtab ).show();
+    if($("#correction_form").is(":visible")) {$("#correction_form").hide ();$("#mapresults_list").show();}
 	start_maptab=selectedtab;
 });
 
