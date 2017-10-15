@@ -44,7 +44,7 @@
 
 .info_500ftbuffer {
     font-family: 'Poppins';
-	font-size: 1em;
+	font-size: .75em;
     position: relative;
     max-width: 100%;
     max-height: 50%;
@@ -52,8 +52,6 @@
     padding: 0px 0px 0px 0px;
     line-height: 1;
     color: white;
-	margin-bottom: 25vh;
-    
 }
 
 .epa_locations {
@@ -68,6 +66,7 @@
 
 .epa_locations p {
     padding-left: 5px;
+	font-size: 1.25em;
 }
 
 .epa_locations span {
@@ -95,6 +94,7 @@
 
 .lms_locations p {
     padding-left: 5px;
+	font-size: 1.25em;
 }
 
 .lms_locations span {
@@ -117,6 +117,10 @@
     width:100%;
     background-color: #2a3137;
 } 
+
+.mapresults_googlestreetview {
+	height: 200px;
+}
 
 .mapresults_googlestreetview img{
 	max-width: 100%;
@@ -203,6 +207,15 @@
 
 .searchmap_key span {
     padding-left: 5px;
+}
+
+.useslist{
+	border: 2px solid #393a3e;
+}
+
+.useslist:hover{
+	cursor: pointer;
+	border-color: #f9b200;
 }
 
 .key_sensitive{ background-color: #f9b200}

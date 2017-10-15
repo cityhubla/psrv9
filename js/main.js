@@ -8,6 +8,7 @@ $("div#menu").ready(function() {
 $("div#searchmap_info").ready(function() {
 	$("div#searchmap_info").load("./html/searchmap_info.html", function(){
 	})
+	$("div#mapresults_list").load("./html/parcelinfo.html");	
 });
 
 var animatelogo = function(){
