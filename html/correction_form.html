@@ -1,28 +1,31 @@
 <div class="container">  
   <form id="contact">
-    <h3>Does this property have a sensitive or hazardous use?</h3>
+    <h3>The current property use is</h3>
     <h4>Fill out this form to the best of your knowledge</h4>
     <fieldset>
-      <input placeholder="What is the name of the use?" type="text" tabindex="1">
+      <input placeholder="What is the name of the use?" name="use_name" type="text" tabindex="1">
     </fieldset>
     <fieldset>
-      <input placeholder="What is the address?" type="text" tabindex="1">
+      <input placeholder="What is the address?" name="use_address" type="text" tabindex="1">
+    </fieldset>
+	<fieldset class='radiobutton'>
+		<h4>What kind of use is this?</h4>
+	  <input type="radio" name="usetype" value="sensitive"> Sensitive<br>
+		<input type="radio" name="usetype" value="hazardous"> Hazardous<br>
+		<input type="radio" name="usetype" value="vacant"> Vacant
+	  </fieldset>
+    <fieldset>
+		<textarea placeholder="What do you see | hear | smell?" name="use_desc" type="text" tabindex="5"></textarea>
     </fieldset>
     <fieldset>
-      <input placeholder="Is it sensitive or hazardous?" type="text" tabindex="1">
-    </fieldset>
-    <fieldset>
-		<textarea placeholder="What do you see | hear | smell?" type="text" tabindex="5"></textarea>
-    </fieldset>
-    <fieldset>
-      <input placeholder="Your Name (Optional)" type="text" tabindex="1">
+      <input placeholder="Your Name (Optional)" name="use_submittedby" type="text" tabindex="1">
     </fieldset>
 	<fieldset>
-      <input placeholder="Your Email (Optional)" type="text" tabindex="1">
+      <input placeholder="Your Email (Optional)" name="use_submittedbyemail" type="text" tabindex="1">
     </fieldset>  
     <fieldset>
-      <button name="submit" type="submit" id="contact-submit" onclick='submitgoogle()' data-submit="...Sending">Submit</button>
-        <button type="button" onclick='return $("button#mapresults").trigger("click")'>Cancel</button>
+      <button type="button" id="contact-submit" onclick='submitgoogle()'>Submit</button>
+      <button type="button" onclick='return $("button#mapresults").trigger("click")'>Cancel</button>
     </fieldset>
     <fieldset>
       
@@ -35,3 +38,32 @@
 <input id="input-q2" placeholder="Is this place located here?" name="q2"><br>
 <button id="form-submit" type="submit">SUBMIT</button>
 </form-->
+
+<!--div class="container">  
+  <form id="contact">
+    <h3>The current property use is</h3>
+    <h4>Fill out this form to the best of your knowledge</h4>
+    <fieldset>
+      <input placeholder="What is the name of the use?" type="text" tabindex="1">
+    </fieldset>
+    <fieldset>
+      <input placeholder="What is the address?" type="text" tabindex="1">
+    </fieldset>
+    <fieldset>
+		<textarea placeholder="What do you see | hear | smell?" type="text" tabindex="5"></textarea>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Your Name (Optional)" type="text" tabindex="1">
+    </fieldset>
+	<fieldset>
+      <input placeholder="Your Email (Optional)" type="text" tabindex="1">
+    </fieldset>  
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit" onclick='submitgoogle()' data-submit="...Sending">Submit</button>
+      <button type="button" onclick='return $("button#mapresults").trigger("click")'>Cancel</button>
+    </fieldset>
+    <fieldset>
+      
+    </fieldset>
+  </form>
+</div-->

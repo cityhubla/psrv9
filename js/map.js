@@ -19,6 +19,7 @@ var map = new mapboxgl.Map({
     style: 'mapbox://styles/hhpsrla/cj8sbyvutcchh2ro1ksxzd8id', //psr_v9A style
     zoom: 11,
     minZoom: 9,
+	hash:true,
     center: [-118.2751, 33.9843] //Centers in middle of both community plans
 });
 
@@ -196,7 +197,7 @@ map.on('load', function () {
 			//$("#info_selected").load("./html/propertyinfo.html")
 			//console.log(parcel);
 			
-			console.log(parcel);
+			//console.log(parcel);
 			$("button#mapresults").trigger("click");
         
             $.each(hazardous_data.features, function (queryfeature, value) {
@@ -207,7 +208,7 @@ map.on('load', function () {
                         siccode = value.properties.siccoded;
                     } else {siccode = "Facilty"; }
                     $("div#hazardous_resultlist").append(
-                        "<div class='epa_locations' onclick='togglelist(this)' onmouseover='highlightparcel(" + value.properties.AIN + ")'><span>" + siccode + "</span>" +
+                        "<div class='epa_locations' onclick='togglelist(this)' onmouseover='highlightparcel(" + value.properties.AIN + ")'><img src='img/pulldown_hazardous.png'><span>" + siccode + "</span>" +
                             "<div class='sublist'><p class='usetitle'>Name: " + value.properties.primaryna +
                             "<p>Address: " + value.properties.locationa +
                             "<p>It is reported to the: " + value.properties.pgmsysac +
@@ -227,14 +228,14 @@ map.on('load', function () {
                         siccode = value.properties.cat2;
                     } else {siccode = "Sensitive Use"; }
                     $("div#sensitive_resultlist").append(
-                        "<div class='lms_locations' onclick='togglelist(this)' onmouseover='highlightparcel(" + value.properties.AIN + ")'><span>" + value.properties.cat2 + "</span>"
+                        "<div class='lms_locations' onclick='togglelist(this)' onmouseover='highlightparcel(" + value.properties.AIN + ")'><img src='img/pulldown_sensitive.png'><span>" + value.properties.cat2 + "</span>"
                             + "<div class='sublist'><p class='usetitle'>Name: " + value.properties.name +
                             "<p>Address: " + value.properties.addrln1 +
                             "<p>Description: " + value.properties.descriptio +
                             "<p>Source: LACOUNTY Points of Interest (LMS Data)</div></div>"
                     );
         			sensitive_count = sensitive_count + 1;
-					console.log(sensitive_count);
+					//console.log(sensitive_count);
                 }
             });
 		getselectedparcel(parcel);
@@ -256,7 +257,8 @@ var getselectedparcel = function(parcel){
 		}
 	});
 	getstreetview(parcel);
-	console.log(within500)
+	//console.log(within500)
+	$(".assessorid").empty().html(parcel.properties.ain);
 	$("div#parcel_selected_1").empty().html("This " + parcel.properties["2015p_Gene"] + " property has " + countuses + " uses.");
 	$("div#parcel_selected_2").empty().html("If this is incorrect, click here to help us update our data.");
 	$("div#parcel_selected_3").empty().html("Within 500ft there are " +within500.length+ " properties with ");
@@ -281,7 +283,7 @@ var getstreetview = function(parcel){
 	var address=[];
 	if (parcel.properties['2015p_Prop'] != null){
 		address = parcel.properties['2015p_Prop'].split(/( LOS ANGELES CA )/);} else {address[0] = ""}
-	console.log(address);
+	//console.log(address);
 	/*var imagecheck = $.getJSON("https://maps.googleapis.com/maps/api/streetview/metadata?size=400x200&location=" + getcentroid.geometry.coordinates[1] + "," + getcentroid.geometry.coordinates[0] + "&key=AIzaSyCu4adL3bWUY41EXY7rxMrhGaOJ9AvWibE",function(data){ 
 		console.log(data);
 		return data.status;
@@ -336,13 +338,15 @@ map.on('load', function() {
 var toggle_result = function (selection) {
         $('div#'+selection).slideToggle();
 	
-		console.log(selection)
+		//console.log(selection)
     };
-
 
 //Function to Toggle List and slide
 var togglelist = function (e) {
-        $(e).find('.sublist').slideToggle();
+		//if($('.sublist').children().css("display", "block").length != 0){
+			//$('.sublist').children().css("display", "block").slideToggle();
+		//};
+		$(e).find('.sublist').slideToggle();
     };
 
 var highlightparcel = function (parcel) {

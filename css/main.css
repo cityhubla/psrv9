@@ -40,7 +40,7 @@ a:link {
 #nav_head {
     display: block;
     margin: 0 auto;
-    height: 8vh;
+    height: 9vh;
     width: 90vw;
 }
 
@@ -270,6 +270,7 @@ div#mapresults {
 	position: relative;
     float: left;
 	display:none;
+	width:100%;
 }
 
 div#mapoptions {
