@@ -11,16 +11,37 @@ var sensitive_data = {type: 'FeatureCollection', features: []};
 var hazardous_epadata = 'https://spreadsheets.google.com/feeds/list/1TWeq0ytlYlKa-yGB9t_6gMAJg3pOobgEjXlWJJ4RFpI/1/public/basic?alt=json'; //Pulls in feed from EPA List
 var sensitive_lms = 'https://spreadsheets.google.com/feeds/list/1RRYPfj5Eh_vu4kN5nWb2GUGVKZQL_gFgCPHAmdRaDTo/1/public/basic?alt=json'; //Pulls in feed from LMS County List
 
+//Browser Check
+//Issues surrounding webgl memory leaks with iOS Safari, this checks and returns mobile safari or default options
+var browser_zoom,
+	browser_minzoom,
+	browser_cachesize
+function getMobileOperatingSystem() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        browser_zoom = 15;
+		browser_minzoom = 14;
+		browser_cachesize = 4;
+    } else {
+        browser_zoom = 11;
+		browser_minzoom = 11;
+		browser_cachesize = null;
+	}
+}
+
+getMobileOperatingSystem();
+
 
 //Loads mapbox map, linked to mapstyle psr_v5
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGhwc3JsYSIsImEiOiJjaW1sanhqa3kwNmdidHZtMHEyZ2VrdHV4In0.JSLojS72jB2OWG5NN82ysw';
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/hhpsrla/cj8sbyvutcchh2ro1ksxzd8id', //psr_v9A style
-    zoom: 11,
-    minZoom: 9,
-	hash:true,
-    center: [-118.2751, 33.9843] //Centers in middle of both community plans
+    center: [-118.2751, 33.9843],//Centers in middle of both community plans
+	zoom: browser_zoom,
+	minZoom: browser_minzoom,
+	maxTileCacheSize: browser_cachesize
 });
 
 //Creates an empty feature for highlighting a selected parcel
@@ -31,8 +52,9 @@ map.on('load', function () {
         maxWidth: 80,
         unit: 'imperial'
     }));
+	
 //Mirror source for parcel select source (hpsrla.83hukeln), layer (assessor_2017geojson)
-    map.addSource("source-select", {
+	map.addSource("source-select", {
         type: "vector",
         url: "mapbox://hhpsrla.83hukeln"
     });
