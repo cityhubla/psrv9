@@ -207,6 +207,13 @@
     vertical-align: middle;
 }
 
+.searchmap_key img {
+    height:60px;
+    width:60px;
+    display:inline-block;
+    vertical-align: middle;
+}
+
 .searchmap_key span {
     padding-left: 5px;
 }

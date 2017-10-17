@@ -33,8 +33,6 @@ a:link {
 
 
 
-
-
 /*body breakdown*/
 
 #nav_head {
@@ -128,7 +126,9 @@ background-color: #393a3e;
 .contents {
 	padding:10px;
 	min-height: 15vh;
-    margin-bottom: 25vh;
+    margin-bottom: 50vh;
+	font-family: 'Poppins';
+    color: white;
 }
 
 #cover img{
@@ -262,6 +262,7 @@ div#searchmap {
 	position: relative;
     float: left;
 	display:block;
+	margin-bottom: 25vh;
 }
 
 div#mapresults {
@@ -269,16 +270,16 @@ div#mapresults {
     height:100%;
 	position: relative;
     float: left;
-	display:none;
 	width:100%;
+	margin-bottom: 25vh;
 }
 
-div#mapoptions {
+div#mapoption {
     overflow-y: auto;
     height:100%;
 	position: relative;
     float: left;
-	display:none;
+	margin-bottom: 25vh;
 }
 
 /*map panel end*/
@@ -392,9 +393,9 @@ text-align: center;
 #map_info{
     width: 100%;
     position: absolute;
-    height: 60px;
     bottom: 0px;
     z-index: 5;
+    top: 50px;
 } 
 	
 .maptab_button{
@@ -431,11 +432,6 @@ text-align: center;
 	font-size: 4em;
 }
 
-#cover_contents{
-	max-width:100%;
-	
-	
-}
 .home_centered{
 	padding:10px;
 	margin-bottom: 25vh;

@@ -6,9 +6,9 @@ $("div#menu").ready(function() {
 });
 
 $("div#searchmap_info").ready(function() {
-	$("div#searchmap_info").load("./html/searchmap_info.html", function(){
-	})
+	$("div#searchmap_info").load("./html/searchmap_info.html", function(){})
 	$("div#mapresults_list").load("./html/parcelinfo.html");	
+	$("div#mapoption").load("./html/uses_legend.html");	
 });
 
 var animatelogo = function(){
@@ -77,12 +77,14 @@ var start_maptab = "searchmap"
 //Listener to change tabs
 $( ".maptab_button" ).click(function() {
     var selectedtab = $(this).attr('id');
+	console.log(selectedtab);
 	$( ".btn_active").removeClass("btn_active");
 	$( this ).addClass("btn_active");
     $( "div#"+start_maptab ).hide(); 
 	$( "div#"+selectedtab ).show();
     if($("#correction_form").is(":visible")) {$("#correction_form").hide ();$("#mapresults_list").show();}
 	start_maptab=selectedtab;
+	console.log(start_maptab);
 });
 
 var fillform = function(){
