@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108217744-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-108217744-1');
+	</script>
     <meta charset='utf-8' />
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
@@ -21,6 +29,8 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+
     
 
 </head>
@@ -47,28 +57,25 @@
             <div id="map"></div>
             <div id="map_info">
                 <div id='infopanel'>
-					
+					<div class="mobilepullup"></div>
 					<div id='maptabs'>
 						<button class="maptab_button btn_active" id="searchmap">Search Map</button>
-						<button class="maptab_button" id="mapresults">Map Results</button>
-						<button class="maptab_button" id="mapoptions">Map Settings</button>
+						<button class="maptab_button" id="mapresults">Within 500ft</button>
+						<button class="maptab_button" id="mapoption">Type of Uses</button>
 					</div>
                     
                     <div id='searchmap'>
                         <div id='geocoder' class='geocoder'></div>
                         <div id="searchmap_info"></div>
                     </div>
-					<div id='mapresults'>
-						<div id='mapresults_list'>
-							<div class="contents initial">
-							<p>Please select a parcel on the map to find out what is within 500ft.</p>
-							</div>
-						</div>
+					<div id='mapresults' style="display: none;">
+						<div id='mapresults_list'></div>
 						<div class="correction_form" id="correction_form"></div>
 						<div class="info_500ftbuffer" id="info_500ftbuffer">
 						</div>
 					</div>
-					<div id='mapoptions'>
+					<div id='mapoption' style="display: none;">
+			
 					</div>
                     <!--div id='scrollinfo'>
                         <div id='searchmap'>
@@ -93,5 +100,7 @@
     <script src="js/map.js"></script>
     <script src="js/main.js"></script>
 	<script src="js/form.js"></script>
+
+
 </body>
 </html>
