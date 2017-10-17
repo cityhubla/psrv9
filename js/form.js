@@ -27,7 +27,7 @@ var submitgoogle = function () {
 					 post_username + "=" + username + "&" +
 					 post_useremail + "=" + useremail + "&" +
 					 submitRef);
-	$.post(submitURL); //Submitting will trigger a CORS issue, will adjust 
+	$.post(submitURL); //Submitting will trigger a CORS issue but still submits form, this should be fixed 
 	//$(this)[0].action=submitURL;
 	//$('#input-feedback').text('Thank You!');
 
