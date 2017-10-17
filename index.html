@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108217744-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-108217744-1');
+	</script>
     <meta charset='utf-8' />
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
@@ -8,27 +16,27 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon.ico">
+	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.css' rel='stylesheet' />
     <link href="css/main.css" rel='stylesheet'>
-    
-    <link href="css/map.css" rel='stylesheet'>
+	<link href="css/main_mobile.css" rel='stylesheet'>
+	<link href="css/correction_form.css" rel='stylesheet'>
     <link rel='stylesheet' href='css/mapbox-gl-geocoder_modified.css' type='text/css' />
     <link href="css/infopanel.css" rel='stylesheet'>
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.js'></script>
     <script src='js/mapbox-gl-geocoder_modified.js'></script>
     <script src="js/vendor/turf.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-    
-
+	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>  
 </head>
 <body>
+	<!-- Map Header -->
     <div id="nav_head">
         <div class="navlogo">Are you within 500ft?</div>
         <button class="menubutton" id="togglenav">menu</button>
         <div class="navmenu">
-            <button class="menubutton submenu" id="contact"> contact |</button>
+            <button class="menubutton submenu" id="contact_psr"> contact |</button>
             <button class="menubutton submenu" id="faq"> faq |</button>
             <button class="menubutton submenu" id="resources"> resources |</button>
             <button class="menubutton submenu" id="toolkits"> toolkits |</button>
@@ -38,33 +46,54 @@
 			<button class="menubutton submenu" id="home"> home |</button>
         </div>
     </div>
-    <div id="main">
-        <div class="cover" id="cover">
+	
+	<!--Main -->
+	<div id="main">
+		<div class="cover" id="cover">
 			<div id="cover_contents"></div>
 		</div>
-        <div id="map_panel">
-            <div id="map"></div>
-            <div id="map_info">
-                <div id='infopanel'>
-                    <div id='geocoder' class='geocoder'></div>
-                    <div id='scrollinfo'>    
-                        <div id='info_1'>Hover and click on the map to see what is within 500ft, or type your address</div>
-                        <div id='info_selected'></div>        
-                        <div id='info_500ftbuffer'></div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-    </div>
-    <div id="nav_foot">
-                    <p>A PROJECT OF | <a href ="http://www.psr-la.org/">PHYSICIANS FOR SOCIAL RESPONSIBILITY - LOS ANGELES</a>
-                    <a href="https://www.facebook.com/psrla"><img src="img/facebook.png"></a>
-                    <a href="https://twitter.com/psrla"><img src="img/twitter.png"></a>
-                    <a href="https://www.youtube.com/user/PSRLA"><img src="img/youtube.png"></a>
-                    <br> MADE POSSIBLE BY | <a href="http://www.calendow.org/">THE CALIFORNIA ENDOWMENT</a></p>
-    </div>
-    <script src="js/map.js"></script>
-    <script src="js/main.js"></script>
+		<div id="map_panel">
+			<div id="map"></div>
+
+			<div id="map_info">
+				<div id='infopanel'>
+
+					<div id='maptabs'>
+						<button class="maptab_button" id="seemap">See Map</button>
+						<button class="maptab_button btn_active" id="searchmap">Search Map</button>
+						<button class="maptab_button" id="mapresults">Within 500ft</button>
+						<button class="maptab_button" id="mapoption">Type of Uses</button>
+					</div>
+
+					<div id='searchmap'>
+						<div id='geocoder' class='geocoder'></div>
+						<div id="searchmap_info"></div>
+					</div>
+
+					<div id='mapresults' style="display: none;">
+						<div id='mapresults_list'></div>
+						<div class="correction_form" id="correction_form"></div>
+						<div class="info_500ftbuffer" id="info_500ftbuffer"></div>
+					</div>
+
+					<div id='mapoption' style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--Footer-->
+	<div id="nav_foot">
+		<p>A PROJECT OF | <a href ="http://www.psr-la.org/" target="_blank">PHYSICIANS FOR SOCIAL RESPONSIBILITY - LOS ANGELES</a>
+		<a href="https://www.facebook.com/psrla" target="_blank"><img src="img/facebook.png"></a>
+		<a href="https://twitter.com/psrla" target="_blank"><img src="img/twitter.png"></a>
+		<a href="https://www.youtube.com/user/PSRLA" target="_blank"><img src="img/youtube.png"></a>
+		<br> MADE POSSIBLE BY | <a href="http://www.calendow.org/" target="_blank">THE CALIFORNIA ENDOWMENT</a></p>
+	</div>
+	
+	<script src="js/map.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/form.js"></script>
 </body>
 </html>

@@ -7,10 +7,10 @@
     right:0;
     border-style: solid;
     border-color: white;
+	overflow-y: hidden;
 }
 
 #info_1 {
-    font-family: 'Poppins', sans-serif;
 	font-size: 1.25em;
     position: relative;
     max-width: 100%;
@@ -18,51 +18,47 @@
     margin: 45px 0 0 0;
     padding: 10px 10px 10px 10px;
     line-height: 1;
-    color: white
 }
 
 #info_selected {
-    font-family: 'Poppins', sans-serif;
 	font-size: 1.25em;
     position: relative;
     max-width: 100%;
     display: block;
     padding: 10px 10px 10px 10px;
     line-height: 1;
-    color: white;
     background-color: #708090;
 }
 
 #scrollinfo{
-    overflow-y: scroll;
-    height:100%
+    overflow-y: auto;
+    height:100%;
+	position: relative;
+    float: left;
+    display:none;
 }
 
-#info_500ftbuffer {
-    font-family: 'Poppins', sans-serif;
-	font-size: 1em;
+.info_500ftbuffer {
+	font-size: .75em;
     position: relative;
     max-width: 100%;
     max-height: 50%;
-    display: block;
+    display: none;
     padding: 0px 0px 0px 0px;
     line-height: 1;
-    color: white;
-    
 }
 
 .epa_locations {
-    background-color: #179dd9;
     opacity:.7;
     display:inline-block;
-    color:white;
     width:100%;
     line-height: 30px;
     cursor: pointer;
 }
 
 .epa_locations p {
-    padding-left: 5px;
+    padding-left: 20px;
+	font-size: 1.25em;
 }
 
 .epa_locations span {
@@ -74,22 +70,20 @@
 }
 
 .epa_locations img{
-    width:30px;
     vertical-align: middle;
 }
 
 .lms_locations {
-    background-color: #f9b200;
     opacity:.7;
     display:inline-block;
-    color:white;
     width:100%;
     line-height: 30px;
     cursor: pointer;
 }
 
 .lms_locations p {
-    padding-left: 5px;
+    padding-left: 20px;
+	font-size: 1.25em;
 }
 
 .lms_locations span {
@@ -101,20 +95,134 @@
 }
 
 .lms_locations img{
-    width:30px;
     vertical-align: middle;
 }
 
 
 .sublist{
-    color:white;
     display:none;
     width:100%;
-    background-color: #2a3137;
+	border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: white;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: white;
 } 
+
+.mapresults_googlestreetview {
+	max-height: 200px;
+	display: inline-block;
+}
+
+.mapresults_googlestreetview img{
+	max-width: 100%;
+	width:800px;
+	filter: brightness(75%);
+}
+
+.mapresults_address {
+	position: absolute;
+	top:0;
+	padding:10px;
+	font-size: 2em;
+	font-weight: 700;
+}
+
+.mapresults_nogoogleimage{
+	max-width: 100%;
+	height:200px;
+}
+
+.parcel_selected{
+    font-size: 1.5em;
+    position: relative;
+    max-width: 100%;
+    display: block;
+    line-height: 1;
+	padding: 5px;
+}
+
+.parcel_selected_form{
+    font-size: .75em;
+    position: relative;
+    max-width: 100%;
+    display: block;
+    line-height: 1;
+	padding: 5px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.parcel_selected_form:hover{
+	color: #f9b200;
+}
+
+.parcel_uses img{
+	height:50px;
+	vertical-align: middle;
+}
+
+.parcel_uses span{
+    font-size: 1.5em;
+	padding-left: 5px;
+	vertical-align: -webkit-baseline-middle;
+}
+
+.parcel_correction_form{
+	display:none;
+}
+
+#searchmap_info{
+
+}
+
+.searchmap_key {
+    max-width:100%;
+    margin-bottom: 5px;
+}
+
+.searchmap_icon {
+    height:30px;
+    width:30px;
+    display:inline-block;
+    vertical-align: middle;
+}
+
+.searchmap_key img {
+    height:60px;
+    width:60px;
+    display:inline-block;
+    vertical-align: middle;
+}
+
+.searchmap_key span {
+    padding-left: 5px;
+}
+
+.useslist{
+	border: 2px solid #393a3e;
+}
+
+.useslist:hover{
+	cursor: pointer;
+	border-color: #f9b200;
+}
+
+.key_sensitive{ background-color: #f9b200}
+.key_hazardous{ background-color: #179dd9}
+.key_residential{ background-color: #faf3e0}
+.key_industrial{ background-color: #cddae0}
+.key_commercial{ background-color: #e1cbcb}
+.key_other{ background-color: #dad8d8}
+
+.assessorid{
+	display:none;
+}
 
 @media screen and (max-width: 780px) {
 #infopanel{
-width:100%
-}
+	width:100%;
+	border-style: none;
+	}
 }
