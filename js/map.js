@@ -23,6 +23,7 @@ function getMobileOperatingSystem() {
         browser_zoom = 15;
 		browser_minzoom = 14;
 		browser_cachesize = 4;
+		$(".apple_warning").show();
     } else {
         browser_zoom = 11;
 		browser_minzoom = 11;
@@ -40,6 +41,7 @@ var map = new mapboxgl.Map({
     style: 'mapbox://styles/hhpsrla/cj8sbyvutcchh2ro1ksxzd8id', //psr_v9A style
     center: [-118.2751, 33.9843],//Centers in middle of both community plans
 	zoom: browser_zoom,
+	maxBounds:[[-118.5802,33.7326],[-117.9199,34.1274]],
 	minZoom: browser_minzoom,
 	maxTileCacheSize: browser_cachesize
 });
@@ -152,6 +154,7 @@ map.on('load', function () {
 //Function to select parcel, create buffer and fill contents from that parcel
     map.on('click', "assessor_3", function (e) {
 	//$("#mapresults_list").empty().load("./html/parcelinfo.html");	
+		reset_mapinfo();
     //Highlight selected parcel upon click
         var feature = e.features[0];
         map.setFilter("userselectedparcel", ["==", 'ain', feature.properties.ain]);
@@ -205,21 +208,18 @@ map.on('load', function () {
         });
         within500 = jQuery.unique(within500);
         map.setFilter("within500ft", ['in', 'ain'].concat(within500));
-        //console.log(within500);
+
         loadlist(within500, parcel);
     };
 
 //Function to load information panel with content
     var loadlist = function (within500ft, parcel) {
-            //$("#mapresults_list").empty().load("./html/parcelinfo.html");
+
             $("button#mapresults").trigger("click")
             $(".info_500ftbuffer").empty();
 			hazardous_count = 0;
 			sensitive_count = 0;
-			//$("#info_selected").load("./html/propertyinfo.html")
-			//console.log(parcel);
-			
-			//console.log(parcel);
+
 			$("button#mapresults").trigger("click");
         
             $.each(hazardous_data.features, function (queryfeature, value) {
@@ -234,11 +234,9 @@ map.on('load', function () {
                             "<div class='sublist'><p class='usetitle'>Name: " + value.properties.primaryna +
                             "<p>Address: " + value.properties.locationa +
                             "<p>It is reported to the: " + value.properties.pgmsysac +
-                            "<p><a href=" + value.properties.frsfacil + ">Source: EPA Data</a></p>" +
-                            "<p id='openform'>Is this information correct?</p></div></div>"
+                            "<p><a href=" + value.properties.frsfacili + " target='_blank'>Source: EPA Data</a></p>"
                     );
 					hazardous_count = hazardous_count + 1;
-        
                 }
             });
     
@@ -257,7 +255,6 @@ map.on('load', function () {
                             "<p>Source: LACOUNTY Points of Interest (LMS Data)</div></div>"
                     );
         			sensitive_count = sensitive_count + 1;
-					//console.log(sensitive_count);
                 }
             });
 		getselectedparcel(parcel);
@@ -279,24 +276,14 @@ var getselectedparcel = function(parcel){
 		}
 	});
 	getstreetview(parcel);
-	//console.log(within500)
 	$(".assessorid").empty().html(parcel.properties.ain);
 	$("div#parcel_selected_1").empty().html("This " + parcel.properties["2015p_Gene"] + " property has " + countuses + " uses.");
 	$("div#parcel_selected_2").empty().html("If this is incorrect, click here to help us update our data.");
 	$("div#parcel_selected_3").empty().html("Within 500ft there are " +within500.length+ " properties with ");
 	$("div#parcel_selected_4A").empty().html("<img src='img/why500ft-17.png'><span>" +sensitive_count+ " sensitive uses</span>");
-	$("div#parcel_selected_5A").empty().html("<img src='img/haz/haz_mfg.png'><span>" +hazardous_count+ " hazardous uses</span>");
-				
-	/*$("#mapresults_list").append(
-		"<div class='parcel_selected'>This " + parcel.properties["2015p_Gene"] + " property has " + countuses + " uses.</div>"+
-		"<div class='parcel_selected_form' onclick='fillform()'>If this is incorrect, click here to help us update our data.</div>"+
-		"<div class='parcel_selected'>Within 500ft there are " +within500.length+ " properties with </div>"+
-		"<div class='parcel_uses'><img src='img/why500ft-17.png'><span>" +sensitive_count+ " sensitive uses</span></div>"+
-		"<div class='parcel_uses'><img src='img/haz/haz_mfg.png'><span>" +hazardous_count+ " hazardous uses</span></div>"
-	);*/
+	$("div#parcel_selected_5A").empty().html("<img src='img/haz/haz_mfg.png'><span>" +hazardous_count+ " hazardous uses</span>");		
 };
 
-//Loads sensitive and hazardous data
 
 
 //Get google streetview return html for image load
@@ -305,6 +292,7 @@ var getstreetview = function(parcel){
 	var address=[];
 	if (parcel.properties['2015p_Prop'] != null){
 		address = parcel.properties['2015p_Prop'].split(/( LOS ANGELES CA )/);} else {address[0] = ""}
+
 	//console.log(address);
 	/*var imagecheck = $.getJSON("https://maps.googleapis.com/maps/api/streetview/metadata?size=400x200&location=" + getcentroid.geometry.coordinates[1] + "," + getcentroid.geometry.coordinates[0] + "&key=AIzaSyCu4adL3bWUY41EXY7rxMrhGaOJ9AvWibE",function(data){ 
 		console.log(data);
@@ -360,19 +348,22 @@ map.on('load', function() {
 var toggle_result = function (selection) {
         $('div#'+selection).slideToggle();
 	
-		//console.log(selection)
     };
 
 //Function to Toggle List and slide
 var togglelist = function (e) {
-		//if($('.sublist').children().css("display", "block").length != 0){
-			//$('.sublist').children().css("display", "block").slideToggle();
-		//};
-		$(e).find('.sublist').slideToggle();
+	if($(e).find('.sublist').is(":visible")){
+		$('.sublist').slideUp();
+	} else if($('.sublist').is(":visible")){
+			$('.sublist').slideUp();
+			$(e).find('.sublist').slideDown();
+		} else {$(e).find('.sublist').slideDown();}
+		
+		
     };
 
 var highlightparcel = function (parcel) {
-        map.setFilter('highlightparcel', ['==', 'ain', String(parcel)]);
+        map.setFilter('highlightparcel', ['==', 'ain', String(parcel)]); 
     };
 
 var toggleform = function(formdata) {
@@ -384,3 +375,8 @@ var toggleform = function(formdata) {
 $("#openform").click(function () {
     $("#gform").slideDown();
 });
+
+var reset_mapinfo = function(){
+	$("#sensitive_resultlist").hide();
+	$("#hazardous_resultlist").hide();
+}

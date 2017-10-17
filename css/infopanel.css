@@ -11,7 +11,6 @@
 }
 
 #info_1 {
-    font-family: 'Poppins';
 	font-size: 1.25em;
     position: relative;
     max-width: 100%;
@@ -19,18 +18,15 @@
     margin: 45px 0 0 0;
     padding: 10px 10px 10px 10px;
     line-height: 1;
-    color: white
 }
 
 #info_selected {
-    font-family: 'Poppins';
 	font-size: 1.25em;
     position: relative;
     max-width: 100%;
     display: block;
     padding: 10px 10px 10px 10px;
     line-height: 1;
-    color: white;
     background-color: #708090;
 }
 
@@ -43,7 +39,6 @@
 }
 
 .info_500ftbuffer {
-    font-family: 'Poppins';
 	font-size: .75em;
     position: relative;
     max-width: 100%;
@@ -51,13 +46,11 @@
     display: none;
     padding: 0px 0px 0px 0px;
     line-height: 1;
-    color: white;
 }
 
 .epa_locations {
     opacity:.7;
     display:inline-block;
-    color:white;
     width:100%;
     line-height: 30px;
     cursor: pointer;
@@ -83,7 +76,6 @@
 .lms_locations {
     opacity:.7;
     display:inline-block;
-    color:white;
     width:100%;
     line-height: 30px;
     cursor: pointer;
@@ -108,7 +100,6 @@
 
 
 .sublist{
-    color:white;
     display:none;
     width:100%;
 	border-bottom-style: solid;
@@ -131,13 +122,11 @@
 }
 
 .mapresults_address {
-	font-family: 'poppins';
 	position: absolute;
 	top:0;
 	padding:10px;
 	font-size: 2em;
 	font-weight: 700;
-	color:white;
 }
 
 .mapresults_nogoogleimage{
@@ -146,24 +135,20 @@
 }
 
 .parcel_selected{
-	font-family: 'Poppins';
     font-size: 1.5em;
     position: relative;
     max-width: 100%;
     display: block;
     line-height: 1;
-    color: white;
 	padding: 5px;
 }
 
 .parcel_selected_form{
-	font-family: 'Poppins';
     font-size: .75em;
     position: relative;
     max-width: 100%;
     display: block;
     line-height: 1;
-    color: white;
 	padding: 5px;
 	margin-bottom: 10px;
 	cursor: pointer;
@@ -179,9 +164,7 @@
 }
 
 .parcel_uses span{
-	font-family: 'Poppins';
     font-size: 1.5em;
-    color: white;
 	padding-left: 5px;
 	vertical-align: -webkit-baseline-middle;
 }
@@ -191,8 +174,7 @@
 }
 
 #searchmap_info{
-    font-family:'Poppins';
-    color:white;
+
 }
 
 .searchmap_key {

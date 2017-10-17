@@ -1,0 +1,117 @@
+/*mobile style*/
+
+@media screen and (max-width: 780px) {
+
+#nav_head {
+	width: 100%;
+	height: 50px;
+	position: fixed;
+	z-index: 10;
+	background-color: #393a3e;
+}
+
+#main {
+	width: 100%;
+	position: fixed;
+	height: 100%;
+}
+
+#nav_foot {
+	display:none;
+}
+	
+	
+.navmenu {
+		height: 100vh;
+	}
+
+.navlogo{
+	font-size: 0em
+}
+
+
+
+#map{
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 60px;
+	z-index: 0;
+}
+    
+#map_info{
+    width: 100%;
+    bottom: 60px;
+    z-index: 6;
+	top:50px;
+	height: auto;
+	position: absolute;
+} 
+	
+.maptab_button{
+	font-size: .75em;
+	width:24.9%;
+}
+	
+#maptabs {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: #393a3e;
+	z-index: 8;
+}    
+
+.menubutton {
+    height: 50px;
+}
+	
+#seemap{
+	display:block;
+}
+
+.cover h1{
+    font-size: 2em;
+}
+    
+.cover h2{
+    font-size: 1em;
+}
+#cover_contents{
+	max-width: 100%;
+    margin-bottom: 25vh;
+    margin-top: 50px;
+}
+	
+
+.logo {
+	width:100%;
+}
+	
+.logo h1 {
+	font-size: 4em;
+}
+
+.home_centered{
+	padding:10px;
+	margin-bottom: 25vh;
+	height:unset;
+}
+	
+.cover rightbox {
+	max-width:100%;
+}
+
+.cover leftbox {
+	max-width:100%;
+}
+
+.cover section {
+	display:block;
+}
+	
+.mapboxgl-ctrl-top-right {
+    top: 110px;
+    right: 0;
+}
+
+}

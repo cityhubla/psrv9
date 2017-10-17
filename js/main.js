@@ -83,6 +83,7 @@ $( ".maptab_button" ).click(function() {
     $( "div#"+start_maptab ).hide(); 
 	$( "div#"+selectedtab ).show();
     if($("#correction_form").is(":visible")) {$("#correction_form").hide ();$("#mapresults_list").show();}
+	if($("#seemap").hasClass("btn_active")) {$("#map").css("z-index", 7)} else {$("#map").css("z-index", 0)}
 	start_maptab=selectedtab;
 	console.log(start_maptab);
 });
