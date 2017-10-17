@@ -2,7 +2,12 @@
 $("div#menu").ready(function() {
 	$("#cover_contents").load("./html/home.html", function(){
 		animatelogo();
-	})
+		var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+		// iOS detection from: http://stackoverflow.com/a/9039885/177710
+		if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+			$(".apple_warning").show();
+			}
+	}) 
 });
 
 $("div#searchmap_info").ready(function() {
@@ -77,7 +82,6 @@ var start_maptab = "searchmap"
 //Listener to change tabs
 $( ".maptab_button" ).click(function() {
     var selectedtab = $(this).attr('id');
-	console.log(selectedtab);
 	$( ".btn_active").removeClass("btn_active");
 	$( this ).addClass("btn_active");
     $( "div#"+start_maptab ).hide(); 
@@ -85,7 +89,7 @@ $( ".maptab_button" ).click(function() {
     if($("#correction_form").is(":visible")) {$("#correction_form").hide ();$("#mapresults_list").show();}
 	if($("#seemap").hasClass("btn_active")) {$("#map").css("z-index", 7)} else {$("#map").css("z-index", 0)}
 	start_maptab=selectedtab;
-	console.log(start_maptab);
+
 });
 
 var fillform = function(){
@@ -93,3 +97,10 @@ var fillform = function(){
 	$("#correction_form").load("./html/correction_form.html");
 	$("#correction_form").show("./html/correction_form.html");
 }
+
+//Credits and Thanks
+console.log("Shout out and much thanks to those who inspired, conspired with the explorations and pursuits I have taken.");
+console.log("Thanks to Monika Shankar, Sanna Alas, Jazmine Johnson and the folks at PSR for the opportunity to collaborate on such a fantastic project");
+console.log("Thanks to the teams at Mapbox, and QGIS for developing such fantastic tools");
+console.log("Thanks to my friends and colleagues at maptimeLA with 1-Ups to Nina Kin, Machiko Yasuda, Jon Schleuss, Bond Harper, Regan Hutson, Andy Rutkowski, Colombene Gorton, Leigh Phan, Rex Feng, Chandler Sterling and Greg Scarich");
+console.log("All for LA!!");

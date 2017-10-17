@@ -15,19 +15,26 @@ var sensitive_lms = 'https://spreadsheets.google.com/feeds/list/1RRYPfj5Eh_vu4kN
 //Issues surrounding webgl memory leaks with iOS Safari, this checks and returns mobile safari or default options
 var browser_zoom,
 	browser_minzoom,
-	browser_cachesize
+	browser_cachesize,
+	browser_style,
+	browser
+
+
 function getMobileOperatingSystem() {
   var userAgent = navigator.userAgent || navigator.vendor || window.opera;
     // iOS detection from: http://stackoverflow.com/a/9039885/177710
     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        browser_zoom = 15;
-		browser_minzoom = 14;
-		browser_cachesize = 4;
-		$(".apple_warning").show();
+        browser_zoom = 17;
+		browser_minzoom = 17;
+		browser_cachesize = 2;
+		browser_style = 'mapbox://styles/hhpsrla/cj8vr08ukfj2r2smfhnah96dv';
+		browser = 1;
+		
     } else {
         browser_zoom = 11;
 		browser_minzoom = 11;
 		browser_cachesize = null;
+		browser_style = 'mapbox://styles/hhpsrla/cj8sbyvutcchh2ro1ksxzd8id';
 	}
 }
 
@@ -38,7 +45,7 @@ getMobileOperatingSystem();
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGhwc3JsYSIsImEiOiJjaW1sanhqa3kwNmdidHZtMHEyZ2VrdHV4In0.JSLojS72jB2OWG5NN82ysw';
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/hhpsrla/cj8sbyvutcchh2ro1ksxzd8id', //psr_v9A style
+    style: browser_style, //psr_v9A style
     center: [-118.2751, 33.9843],//Centers in middle of both community plans
 	zoom: browser_zoom,
 	maxBounds:[[-118.5802,33.7326],[-117.9199,34.1274]],
@@ -55,16 +62,35 @@ map.on('load', function () {
         unit: 'imperial'
     }));
 	
-//Mirror source for parcel select source (hpsrla.83hukeln), layer (assessor_2017geojson)
+//Mirror source for parcel select source (hhpsrla.ai6dcnhg), layer (assessor_2017Ageojson)
+	
 	map.addSource("source-select", {
         type: "vector",
-        url: "mapbox://hhpsrla.83hukeln"
+        url: "mapbox://hhpsrla.ai6dcnhg"
     });
+	
     map.addLayer({
         'id': 'userselectedparcel',
         'type': 'fill',
         'source': 'source-select',
-        "source-layer": 'assessor_2017geojson',
+        "source-layer": 'assessor_2017Ageojson',
+        'paint': {
+            'fill-color': '#708090',
+            'fill-opacity': 1
+        },
+        "filter": ['==', 'ain', ""]
+    });
+	
+	//Mirror source for hover over parcel
+    map.addSource("source-hover", {
+        type: "vector",
+        url: "mapbox://hhpsrla.ai6dcnhg"
+    });
+    map.addLayer({
+        'id': 'hoverparcel',
+        'type': 'fill',
+        'source': 'source-hover',
+        "source-layer": 'assessor_2017Ageojson',
         'paint': {
             'fill-color': '#708090',
             'fill-opacity': 0.8
@@ -85,22 +111,7 @@ map.on('load', function () {
         }
     });
     
-//Mirror source for hover over parcel
-    map.addSource("source-hover", {
-        type: "vector",
-        url: "mapbox://hhpsrla.83hukeln"
-    });
-    map.addLayer({
-        'id': 'hoverparcel',
-        'type': 'fill',
-        'source': 'source-hover',
-        "source-layer": 'assessor_2017geojson',
-        'paint': {
-            'fill-color': '#708090',
-            'fill-opacity': 0.8
-        },
-        "filter": ['==', 'ain', ""]
-    });
+
 
 
 //Function to load and parse Hazardous Uses to an Array
