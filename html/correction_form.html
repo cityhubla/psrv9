@@ -1,6 +1,6 @@
 <div class="container">  
   <form id="contact">
-    <h4>Is this the use on the property incorrect?</h4>
+    <h4>Is the use on the property incorrect?</h4>
     <h4>Fill out this form to the best of your knowledge</h4>
     <fieldset>
       <input placeholder="What is the name of the use?" name="use_name" type="text" tabindex="1">
@@ -12,7 +12,8 @@
 		<h4>What kind of use is this?</h4>
 	  <input type="radio" name="usetype" value="sensitive"> Sensitive<br>
 		<input type="radio" name="usetype" value="hazardous"> Hazardous<br>
-		<input type="radio" name="usetype" value="vacant"> Vacant
+		<input type="radio" name="usetype" value="vacant"> Vacant<br>
+        <input type="radio" name="usetype" value="other"> Other<br>
 	  </fieldset>
     <fieldset>
 		<textarea placeholder="What do you see | hear | smell?" name="use_desc" type="text" tabindex="5"></textarea>
@@ -24,7 +25,7 @@
       <input placeholder="Your Email (Optional)" name="use_submittedbyemail" type="text" tabindex="1">
     </fieldset>  
     <fieldset>
-      <button type="button" id="contact-submit" onclick='submitgoogle()'>Submit</button>
+      <button type="button" id="contact-submit" onclick='submitgoogle()' style="background-color: #179dd9">Submit</button>
       <button type="button" onclick='return $("button#mapresults").trigger("click")'>Cancel</button>
     </fieldset>
     <fieldset>
