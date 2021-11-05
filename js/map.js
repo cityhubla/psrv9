@@ -121,7 +121,7 @@ map.on('load', function () {
         download: true,
         header: true,
         complete: function (hazardous) {
-            console.log(hazardous)
+            
             var highlightparcels = [];//Array to fill with APN from feed to highlight by color
             //This function parses the Google JSON and pushes into a geojson
             hazardous.data.forEach(function (d) {
@@ -149,7 +149,7 @@ map.on('load', function () {
         download: true,
         header: true,
         complete: function (sensitive) {
-            console.log(sensitive)
+            
             var highlightparcels = [];//Array to fill with APN from feed to highlight by color
             //This function parses the Google JSON and pushes into a geojson
             sensitive.data.forEach(function (d) {
@@ -247,8 +247,6 @@ map.on('load', function () {
                     siccode = value.properties.SIC_CODE_D;
                 } else {
                     siccode = "Facilty";
-                    console.log(siccode)
-
                 }
                 $("div#hazardous_resultlist").append(
                     "<div class='epa_locations' onclick='togglelist(this)' onmouseover='highlightparcel(" + value.properties.ain + ")'><img src='img/pulldown_hazardous.png'><span>" + siccode + "</span>" +
@@ -287,7 +285,7 @@ map.on('load', function () {
 var getselectedparcel = function (parcel) {
     var countuses = 0
     $.each(hazardous_data.features, function (queryfeature, value) {
-        if (value.properties.AIN == parcel.properties.ain) {
+        if (value.properties.ain == parcel.properties.ain) {
             countuses = countuses + 1;
         }
     });
@@ -297,7 +295,7 @@ var getselectedparcel = function (parcel) {
         }
     });
     getstreetview(parcel);
-    $(".assessorid").empty().html(parcel.properties.ain);
+    $(".assessorid").empty().html(parcel.properties.AIN);
     $("div#parcel_selected_1").empty().html("This " + parcel.properties["2015p_Gene"] + " property has " + countuses + " uses.");
     $("div#parcel_selected_2").empty().html("If this is incorrect, click here to help us update our data.");
     $("div#parcel_selected_3").empty().html("Within 500ft there are " + within500.length + " properties with ");
@@ -386,7 +384,6 @@ var togglelist = function (e) {
 
 var highlightparcel = function (parcel) {
     map.setFilter('highlightparcel', ['==', 'ain', String(parcel)]);
-    console.log(parcel)
 };
 
 var toggleform = function (formdata) {
